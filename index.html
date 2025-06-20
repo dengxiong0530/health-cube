@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <title>Hexan by TemplatesCoder</title>
+
+	<!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link type="image/x-icon" href="/src/assets/images/fav-icon.png" rel="icon">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/src/assets/styles/hexan.css">
+    <link rel="stylesheet" type="text/css" href="/src/assets/styles/animate.css">
+
+
+	
+	</head>
+  <body>
+    <div id="app"></div>
+
+    <script type="module" src="/src/main.js"></script>
+	  <script src="/src/assets/js/jquery-3.4.1.min.js"></script>
+		<script src="/src/assets/js/bootstrap.min.js"></script>
+		<script src="/src/assets/js/owl.carousel.min.js"></script>
+		<script src="/src/assets/js/viewportchecker.js"></script>
+		<script src="/src/assets/js/custom.js"></script>
+		<script>
+			jQuery(document).ready(function(){
+	        	jQuery('.fadeInUp,.fadeInRight,.slideInRight,.fadeInLeft,.fadeInDown').addClass("hidden").
+	 
+	        	viewportChecker({
+	          	classToAdd: 'visible animated',
+	          	offset: 50
+	       		});
+	      	});            
+		</script>
+		<script>
+		$('.nav-link').on('click',function(e) {
+	        $('a.nav-link').removeClass('active');
+	        $(this).addClass('active');
+	        if ( $(window).width() < 991 ){
+	        	$(".navbar-toggle").click();
+	        }
+	    });
+		</script>
+		<script>
+			$(window).scroll(function() {
+				var scrollDistance = $(window).scrollTop() +51;
+			
+				// Assign active class to nav links while scolling
+				$('.menu-section').each(function(i) {
+						if ($(this).position().top <= scrollDistance) {
+								$('.navbar-nav a.active').removeClass('active');
+								$('.navbar-nav a').eq(i).addClass('active');
+						}
+				});
+			}).scroll();
+		</script>
+
+  </body>
+
+</html>
