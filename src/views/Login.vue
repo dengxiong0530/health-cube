@@ -86,7 +86,6 @@ const loginForm = ref({
   // username: "admin",
   // password: "admin123",
   rememberMe: false,
-  code: "",
   uuid: ""
 })
 
@@ -114,19 +113,19 @@ function handleLogin() {
 
       console.log("登录表单数据:", loginForm)
       // 调用action的登录方法
-    //   userStore.login(loginForm.value).then(() => {
-    //     const query = route.query
-    //     const otherQueryParams = Object.keys(query).reduce((acc, cur) => {
-    //       if (cur !== "redirect") {
-    //         acc[cur] = query[cur]
-    //       }
-    //       return acc
-    //     }, {})
-    //     router.push({ path: redirect.value || "/", query: otherQueryParams })
-    //   }).catch(() => {
-    //     loading.value = false
+      userStore.login(loginForm.value).then(() => {
+        const query = route.query
+        const otherQueryParams = Object.keys(query).reduce((acc, cur) => {
+          if (cur !== "redirect") {
+            acc[cur] = query[cur]
+          }
+          return acc
+        }, {})
+        router.push({ path: redirect.value || "/", query: otherQueryParams })
+      }).catch(() => {
+        loading.value = false
      
-    //   })
+      })
     }
   })
 }

@@ -8,15 +8,16 @@ export function login(username, password, code, uuid) {
     code,
     uuid
   }
-  return request({
-    url: '/login',
-    headers: {
-      isToken: false,
-      repeatSubmit: false
-    },
-    method: 'post',
-    data: data
-  })
+  // return request({
+  //   url: '/login',
+  //   headers: {
+  //     isToken: false,
+  //     repeatSubmit: false
+  //   },
+  //   method: 'post',
+  //   data: data
+  // })
+  return true
 }
 
 // 注册方法
