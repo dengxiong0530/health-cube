@@ -7,9 +7,9 @@
             <!-- main content -->
             <div id="div-login" class="w3l-form-info" v-show="isVisible">  
                 <div class="w3_info">
-                    <h2>Login</h2>
+                    <h2>Sign in</h2>
                     <!-- <el-form action="#" method="post" ref="loginRef" :model="loginForm"> -->
-                    <el-form  ref="loginRef" :model="loginForm" :rules="loginRules">
+                    <el-form  ref="loginRef" :model="loginForm" @submit.prevent="handleLogin">
                         <div class="input-group">
                             <span><i class="fa fa-user" aria-hidden="true"></i></span>
                             <input type="email" placeholder="Email" required=""  v-model="loginForm.email">
@@ -20,16 +20,17 @@
                         </div>
                         <div class="form-row bottom">
                             <div class="form-check">
-                                <input type="checkbox" id="remenber" name="remenber" value="remenber" v-model="loginForm.remember">
+                                <input type="checkbox" id="remenber" name="remenber" value="remenber" v-model="loginForm.rememberMe">
                                 <label for="remenber"> Remember me?</label>
                             </div>
                             <a href="#url" class="forgot">Forgot password?</a>
                         </div>
-                        <button class="btn btn-primary btn-block" type="submit"  :loading="loading"  @click="handleLogin" >Login</button>
+                        <button class="btn btn-primary btn-block" type="submit"   v-loading="loading"  >Sign in</button>
+                    
                     </el-form>
-                    <p class="continue"><span></span></p>
+                    <!-- <p class="continue"><span></span></p> -->
 
-                    <p class="account">Don't have an account? <a @click="handleSignUp">Sign up</a></p>
+                    <p class="account">Don't have an account? <a @click="clickSignUp">Sign up</a></p>
                 </div>
             </div>
             <!-- //main content -->
@@ -37,30 +38,41 @@
        <div id="div-sign-up" class="w3l-form-info" v-show="!isVisible">
             <div  class="w3_info" >
                 <h2>Sign Up</h2>
-                <form action="#" method="post">
+                <el-form  :model="signUpForm"   @submit.prevent="handleSignUp">
                     <div class="input-group">
                        
                         <span><i class="fa  fa-envelope" aria-hidden="true"></i></span>
-                        <input type="email" placeholder="Email" required="">
+                        <input type="email" placeholder="Email" required=""  v-model="signUpForm.email">
                     </div>
                     <div class="input-group">
                         <span><i class="fa fa-key" aria-hidden="true"></i></span>
-                        <input type="Password" placeholder="Password" required="">
+                        <input type="Password" placeholder="Password" required=""  v-model="signUpForm.password">
                     </div>
 
                     <div class="input-group">
                         <span><i class="fa fa-key" aria-hidden="true"></i></span>
-                        <input type="Password" placeholder="Confirm Password" required="">
+                        <input type="Password" placeholder="Confirm Password" required="" v-model="signUpForm.password_confirm">
+                        
                     </div>
          
-                    <div class="form-row bottom">
+                    <!-- <div class="form-row bottom">
                         <a href="#url" class="forgot">Forgot password?</a>
-                    </div>
-                    <button class="btn btn-primary btn-block" type="submit">Create account</button>
-                </form>
-                <p class="continue"><span></span></p>
+                    </div> -->
+                    <button class="btn btn-primary btn-block" type="submit"  v-loading="signUploading" > Create account</button>
+                </el-form>
+                <!-- <p class="continue"><span></span></p> -->
 
-                <!-- <p class="account">Don't have an account? <a @click="handleSignUp">Login</a></p> -->
+                <p class="account">Already have an account?<a @click="toSignIn">Sign in</a></p>
+              
+      
+
+            <!-- 已有账户链接 -->
+            <!-- <div class="mt-6 text-center">
+                <span class="text-gray-600">Already have an account?</span>
+                <router-link to="/login" class="text-primary-600 hover:text-primary-800 ml-1 font-medium">Sign in</router-link>
+            </div> -->
+
+
             </div>
             </div>
         </div>
@@ -71,74 +83,205 @@
 </template>
 
 <script setup>
-import { computed, ref,getCurrentInstance } from 'vue'
-import { useRouter } from 'vue-router'
-import useUserStore from '@/store/modules/user'
-import Cookies from "js-cookie"
+import { ref,reactive,onMounted   } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import {supabase} from '@/utils/supabase'
+import { useRouter } from 'vue-router';
+import Cookies from 'js-cookie'
+import CryptoJS from 'crypto-js'
 
-const userStore = useUserStore()
-const { proxy } = getCurrentInstance()
+const router = useRouter();
+
+const authStore = useAuthStore()
 const isVisible = ref(true)  
 const loading = ref(false)
 const open = ref(false)
 
-const loginForm = ref({
-  // username: "admin",
-  // password: "admin123",
-  rememberMe: false,
-  uuid: ""
+
+const signUploading = ref(false);
+
+const loginForm = reactive({
+  email: '',
+  password:'',
+  rememberMe: false
 })
 
-const loginRules = {
-  email: [{ required: true, trigger: "blur", message: "请输入您的账号" }],
-  password: [{ required: true, trigger: "blur", message: "请输入您的密码" }]
-}
+const signUpForm = reactive({
+  email: '',
+  password:'',
+  password_confirm:''
+})
 
 
-function handleLogin() {
-  proxy.$refs.loginRef.validate(valid => {
-    if (valid) {
-      loading.value = true
-      // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码
-      if (loginForm.value.rememberMe) {
-        Cookies.set("email", loginForm.value.username, { expires: 30 })
-        Cookies.set("password", encrypt(loginForm.value.password), { expires: 30 })
-        Cookies.set("rememberMe", loginForm.value.rememberMe, { expires: 30 })
+// 加密密钥（实际项目中应从环境变量获取）
+const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY
+
+
+// 页面加载时检查是否有保存的凭证
+onMounted(() => {
+  const credentials = Cookies.get('remembered_credentials')
+  if (credentials) {
+    try {
+      // 解密并解析凭证
+      const bytes = CryptoJS.AES.decrypt(credentials, ENCRYPTION_KEY)
+      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+      
+      loginForm.email = decryptedData.email
+      loginForm.password = decryptedData.password
+      loginForm.rememberMe = true
+    } catch (error) {
+      console.error('Failed to decrypt credentials:', error)
+      // 清除可能已损坏的凭证
+      Cookies.remove('remembered_credentials')
+    }
+  }
+})
+
+
+const handleLogin = async () => {
+
+  loading.value = true
+
+  
+  try {
+ 
+    const result = await authStore.signIn(loginForm.email,loginForm.password)
+
+    // console.log(result.data)
+   
+    if (result.error) {
+      loginMessage(result.error.message,'error')
+    //   console.error('登录失败:', error)
+    } else {
+
+
+          if (loginForm.rememberMe) {
+        // 加密并存储凭证到 Cookie
+        const encryptedData = CryptoJS.AES.encrypt(
+          JSON.stringify({
+            email: loginForm.email,
+            password: loginForm.password
+          }),
+          ENCRYPTION_KEY
+        ).toString()
+        
+        Cookies.set('remembered_credentials', encryptedData, { expires: 30 })
       } else {
-        // 否则移除
-        Cookies.remove("email")
-        Cookies.remove("password")
-        Cookies.remove("rememberMe")
+        // 清除已保存的凭证
+        Cookies.remove('remembered_credentials')
       }
 
-      console.log("登录表单数据:", loginForm)
-      // 调用action的登录方法
-      userStore.login(loginForm.value).then(() => {
-        const query = route.query
-        const otherQueryParams = Object.keys(query).reduce((acc, cur) => {
-          if (cur !== "redirect") {
-            acc[cur] = query[cur]
-          }
-          return acc
-        }, {})
-        router.push({ path: redirect.value || "/", query: otherQueryParams })
-      }).catch(() => {
-        loading.value = false
-     
-      })
+
+      // 登录成功，跳转到Dashboard页面
+    //   console.log('登录成功:', result.data)
+      router.push('/dashboard')
+      loginMessage('sign in success','success')
     }
-  })
+
+  } catch (error) {
+    // error.value = '登录失败，请重试'
+    console.error('sigin error:', error)
+    loginMessage(error,'error')
+  } finally {
+    loading.value = false
+  }
 }
 
-
-function handleSignUp() {
+function clickSignUp() {
    open.value = true
    isVisible.value = false
+}
+
+function toSignIn(){
+   open.value = false
+   isVisible.value = true
+}
+
+// 表单验证
+const validateForm = () => {
+  let isValid = true;
+  
+  // 验证确认密码
+  if (signUpForm.password !== signUpForm.password_confirm) {
+    loginMessage('两次输入的密码不一致','error')
+    isValid = false;
+    return isValid;
+  }
+
+    if (signUpForm.password.length < 6) {
+    loginMessage('Password should be at least 6 characters.','error')
+    isValid = false;
+    return isValid;
+  }
+   return isValid;
+};
+
+// 处理注册
+const handleSignUp = async () => {
+    // console.log(signUpForm)
+  if (!validateForm()) {
+    return;
+  }
+   
+  
+  signUploading.value = true;
+
+
+  
+  try {
+    // 使用Supabase API注册用户并禁用邮箱验证
+    const { error } = await supabase.auth.signUp({
+      email: signUpForm.email,
+      password: signUpForm.password,
+    });
+    if (error) {
+      loginMessage(error,'error')
+      throw error;
+    }
+
+    loginMessage('Registration successful! You can log in now.','success')
+    // 注册成功后可以选择自动登录或跳转到登录页面
+    setTimeout(() => {
+      // 如果使用自动登录，可以在这里添加登录逻辑
+      // 否则跳转到登录页面
+      window.location.href = '/login';
+    }, 2000);
+    
+  } catch (error) {
+    console.error('sgin error:', error);
+   
+  } finally {
+    signUploading.value = false;
+  }
+};
+
+
+
+
+const loginMessage = (message,type) => {
+  ElMessage({
+    showClose: true,
+    message: message,
+    type: type,
+    plain: true,
+    duration: 6000,
+    customClass: 'big-message',
+  })
 }
 
 </script>
 
 <style scoped>
+
+.big-message {
+  width: 400px; /* 设置你想要的宽度 */
+  height: 200px; /* 设置你想要的高度 */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 * {
     box-sizing: border-box;

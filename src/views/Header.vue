@@ -17,15 +17,15 @@
 					                <li class="level">
 					                  	<a href="/" class="page-scroll nav-link" data-scroll>Home</a>
 					                </li>
-					                <!-- <li class="level">
-					                  	<a href="#about-part" class="page-scroll nav-link" data-scroll>About</a>
+					                <li class="level">
+					                  	<a href="/Dashboard" class="page-scroll nav-link" data-scroll>Dashboard</a>
 					                </li>
 					                <li class="level">
-					                  	<a href="#price-part" class="page-scroll nav-link" data-scroll>Pricing</a>
+					                  	<a href="/trend" class="page-scroll nav-link" data-scroll>trend</a>
 					                </li>
 					                <li class="level">
-					                  	<a href="#team-part" class="page-scroll nav-link" data-scroll>Team</a>
-					                </li> -->
+					                  	<a href="/test" class="page-scroll nav-link" data-scroll>Test</a>
+					                </li>  
 					                <!-- <li class="level">
 					                  	<a href="blog.html" class="page-scroll nav-link">Blog</a>
 					                </li> -->
@@ -37,7 +37,12 @@
 								 
 				            </div>
 							<div id="div-login">
-									<a  class="btn btn-color" @click="goToLogin" >Login</a>
+								<div v-if="isLoggedIn">
+								    <!-- <a  class="btn btn-color"  @click="sginOut" > Sign out</a> -->
+									 <span><i class="fa fa-user" aria-hidden="true"></i> {{ user?.email}}</span>  <a @click="sginOut"> Sign out</a>
+								</div>
+									<a  v-else    @click="sginIn"  >Sign in</a>
+									
 							</div>
 						</div>
 					</div>
@@ -47,15 +52,24 @@
 
 
 <script setup>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router';
-
+import { useAuthStore } from '@/stores/auth'
 const router = useRouter();
+const authStore = useAuthStore()
 
-const goToLogin = () => {
-  console.log("跳转页面")
+const user = authStore.user
+
+const isLoggedIn = computed(() => !!authStore.user)
+
+const sginIn = () => {
   router.push('/login');  // 跳转到登录页
 };
 
+const sginOut =() =>{
+	authStore.signOut();
+	router.push('/login');
+}
 
 </script>
 
@@ -64,7 +78,14 @@ const goToLogin = () => {
 #div-login {
 	position: absolute;
 	right: -10px;
-	top: -10px;
+	top: 0px;
+	padding: 7px 18px !important;
+	/* display: inline-block; */
+    /* text-transform: uppercase; */
+    /* font-weight: 400; */
+    color: #9146ff;
+    font-size: 16px;
+    /* position: relative; */
 }
 
 </style>
