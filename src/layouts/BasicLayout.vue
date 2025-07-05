@@ -1,8 +1,13 @@
 <template>
    <div id="basic-layout">
-    <Header/> 
-    <router-view />
-    <Footer/>
+    <el-container> 
+    <el-header> <Header/> </el-header>
+    <el-main><router-view /></el-main>
+    <el-footer> <Footer/></el-footer>
+    </el-container>
+  
+    
+   
     
 
     </div>
@@ -11,10 +16,11 @@
 
 <style scoped>
 
+
+
 </style>
 
 <script setup>
 import Header from '@/views/Header.vue'
-import Home from '@/views/Home.vue'
 import Footer from '@/views/Footer.vue'
 </script>
