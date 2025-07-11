@@ -1,78 +1,45 @@
 <template>
     <div id='dashbord' class="center-sm">
-        <el-row class='one-row' :gutter="20">
-            <el-col :span="6" class="one-row-col">
-                <el-card >
-                    <div class="header">
-                        <div class="avatar">
-                            <!-- 用红色矩形代替图片 -->
-                            <div class="avatar-placeholder"></div>
-                        </div>
-                        <div class="info">
-                            <h2 class="name">{{ name }}</h2>
-                            <p class="title">{{ title }}</p>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="activity-item">
-                            <el-icon :size="18"><clock-circle-outline /></el-icon>
-                            <span class="label">{{ 'Recent Activities' }}</span>
-                            <span class="count">{{ recentActivitiesCount }}</span>
-                        </div>
-                        <div class="activity-item">
-                            <el-icon :size="18"><people-outline /></el-icon>
-                            <span class="label">{{ 'Current Employees' }}</span>
-                            <span class="count">{{ currentEmployeesCount }}</span>
-                        </div>
-                        <div class="activity-item">
-                            <el-icon :size="18"><user-outline /></el-icon>
-                            <span class="label">{{ 'Following' }}</span>
-                            <span class="count">{{ followingCount }}</span>
-                        </div>
-                        <div class="activity-item">
-                            <el-icon :size="18"><picture-outline /></el-icon>
-                            <span class="label">{{ 'Pictures' }}</span>
-                            <span class="count">{{ picturesCount }}</span>
-                        </div>
-                    </div>
-                    <div >
-                        <el-button type="primary" class="follow-button">FOLLOWS</el-button>
-                        <el-button class="message-button">MESSAGE</el-button>
-                    </div>
-                </el-card > </el-col>
-            <el-col :span="10" class="one-row-col">
-                <el-card style="max-width: 100%">
-                    <template #header>xx</template>
+        <el-row class='one-row' :gutter="15">
+            <el-col class="one-row-col" :xs="24" :sm="8" :md="8" :lg="6" :xl="6" :offset="2" >
+                <!-- <el-card> -->
+                <PersonalDetails />
+                <TargetList/>
+                <!-- </el-card> -->
+            </el-col>
+            <el-col class="one-row-col" :xs="24" :sm="12" :md="12" :lg="14" :xl="14">
+                <el-card style="max-width: 100%" shadow="hover">
+                    <!-- <template #header>xx</template> -->
                     <ECharts :options="chartOptions" />
-                    <template #footer>xx</template>
+                    <!-- <template #footer>xx</template> -->
                 </el-card>
+                <TargetDetails/>
 
             </el-col>
-            <el-col :span="8" class="one-row-col"><el-card style="max-width: 100%"></el-card> </el-col>
+            <!-- <el-col :span="8" class="one-row-col"><el-card style="max-width: 100%"></el-card> </el-col> -->
         </el-row>
 
-        <el-row class='two-row' :gutter="20">
-            <el-col :span="12">3333 </el-col>
+        <!-- <el-row class='two-row' :gutter="20">
+            <el-col  class="one-row-col" :xs="24" :sm="8" :md="8" :lg="6" :xl="6" :offset="2" > </el-col>
             <el-col :span="12">4444 </el-col>
-        </el-row>
+        </el-row> -->
     </div>
 </template>
 
 <style scoped>
 #dashbord {
-    margin-top: 105px;
+    margin-top: 80px;
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
-    /* width: 30%; */
     margin-left: 7%;
     margin-right: 7%
 }
 
 .el-col {
     /* background-color: #f0f2f5; */
-    border-radius: 4px;
-    padding: 10px;
+    /* border-radius: 4px; */
+    /* padding: 10px; */
     text-align: center;
 }
 
@@ -87,17 +54,17 @@
 }
 
 .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 20px;
+    /* width: 80px; */
+    /* height: 80px; */
+    /* border-radius: 50%; */
+    /* overflow: hidden; */
+    /* margin-right: 20px; */
 }
 
 .avatar-placeholder {
-    width: 100%;
+    /* width: 100%;
     height: 100%;
-    background-color: red;
+    background-color: red; */
 }
 
 .info {
@@ -158,20 +125,25 @@
 
 <script setup>
 import { ref } from 'vue'
-// import {
-//   ClockCircle,
-//   PeopleOutline,
-//   UserOutline,
-//   PictureOutline
-// } from '@element-plus/icons-vue';
 import ECharts from '@/components/ECharts.vue'
-// 模拟数据
-const name = ref('Josephin Villa');
-const title = ref('Software Engineer');
-const recentActivitiesCount = ref(480);
-const currentEmployeesCount = ref(390);
-const followingCount = ref(485);
-const picturesCount = ref(506);
+import { useAuthStore } from '@/stores/auth'
+import PersonalDetails from '@/views/dashboard/PersonalDetails.vue'
+import Target from '@/views/dashboard/Target.vue'
+import TargetList from '@/views/dashboard/TargetList.vue'
+import TargetDetails from '@/views/dashboard/TargetDetail.vue'
+
+const authStore = useAuthStore()
+
+
+const userId = authStore.user.id
+
+const handleClick = () => {
+    console.log(userId)
+
+
+}
+
+
 
 const bmi = 24.9;
 
@@ -262,4 +234,8 @@ const chartOptions = ref({
         }
     ]
 })
+
+
+
+
 </script>

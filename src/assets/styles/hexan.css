@@ -625,9 +625,9 @@ header.header-fixed {
 	padding-right: 0 !important;
 }
 
-.navbar-nav > li:hover > a, .navbar-nav > li:focus > a, .navbar-nav > li > a.active {
+/* .navbar-nav > li:hover > a, .navbar-nav > li:focus > a, .navbar-nav > li > a.active {
 	color: #fb4275;
-}
+} */
 
 /* megamenu start */
 

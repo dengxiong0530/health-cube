@@ -3,7 +3,7 @@ import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import NotFound from '@/views/error/404.vue';
 import { useAuthStore } from '@/stores/auth'
-import Dashboard from '@/views/Dashboard.vue'
+import Dashboard from '@/views/dashboard/Dashboard.vue'
 import TEST from '@/views/test.vue'
 
 
