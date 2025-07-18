@@ -1,0 +1,119 @@
+[
+    {
+        "targetName": "BMI",
+        "segments": [
+            {
+                "label": "Underweight",
+                "color": "#1E90FF",
+                "width": 25,
+                "left": 0
+            },
+            {
+                "label": "Normal",
+                "color": "#32CD32",
+                "width": 25,
+                "left": 25
+            },
+            {
+                "label": "Overweight",
+                "color": "#FFA500",
+                "width": 25,
+                "left": 50
+            },
+            {
+                "label": "Obesity",
+                "color": "#FF0000",
+                "width": 25,
+                "left": 75
+            }
+        ]
+    },
+    {
+        "targetName": "Weight",
+        "segments": [
+            {
+                "label": "Underweight",
+                "color": "#1E90FF",
+                "width": 25,
+                "left": 0
+            },
+            {
+                "label": "Normal",
+                "color": "#32CD32",
+                "width": 25,
+                "left": 25
+            },
+            {
+                "label": "Overweight",
+                "color": "#FFA500",
+                "width": 25,
+                "left": 50
+            },
+            {
+                "label": "Obesity",
+                "color": "#FF0000",
+                "width": 25,
+                "left": 75
+            }
+        ]
+    },
+    {
+        "targetName": "ABSI",
+        "segments": [
+             {
+                "label": "Very Low",
+                "color": "#64abf3",
+                "width": 20,
+                "left": 0
+            },
+            {
+                "label": "Low Risk",
+                "color": "#1E90FF",
+                "width": 20,
+                "left": 20
+            },
+            {
+                "label": "Average",
+                "color": "#32CD32",
+                "width": 20,
+                "left": 40
+            },
+            {
+                "label": "High Risk",
+                "color": "#FFA500",
+                "width": 20,
+                "left": 60
+            },
+            {
+                "label": "Very High",
+                "color": "#FF0000",
+                "width": 20,
+                "left": 80
+            }
+        ]
+    },
+    {
+        "targetName": "WHR",
+        "segments": [
+           
+            {
+                "label": "Normal",
+                "color": "#32CD32",
+                "width": 33,
+                "left": 0
+            },
+            {
+                "label": "Moderate Risk",
+                "color": "#FFA500",
+                "width": 33,
+                "left": 30
+            },
+            {
+                "label": "High Risk",
+                "color": "#FF0000",
+                "width": 33,
+                "left": 60
+            }
+        ]
+    }
+]

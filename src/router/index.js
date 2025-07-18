@@ -6,6 +6,8 @@ import { useAuthStore } from '@/stores/auth'
 import Dashboard from '@/views/dashboard/Dashboard.vue'
 import TEST from '@/views/test.vue'
 
+import Settings from '@/views/Settings/Settings.vue'
+
 
 
 const routes = [
@@ -31,6 +33,14 @@ const routes = [
       path: '/dashboard',
       name: 'DashBoard',
       component: Dashboard,
+      meta: { requiresAuth: true }
+
+    },
+      {
+
+      path: '/settings',
+      name: 'settings',
+      component: Settings,
       meta: { requiresAuth: true }
 
     },

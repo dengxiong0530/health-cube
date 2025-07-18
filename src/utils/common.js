@@ -226,3 +226,39 @@ export function getNormalPath(p) {
 export function blobValidate(data) {
   return data.type !== 'application/json'
 }
+
+
+/**
+ * 高精度四舍五入函数，避免浮点数计算误差
+ * @param {number} num - 需要四舍五入的数字
+ * @param {number} n - 保留的小数位数
+ * @returns {number} - 四舍五入后的结果数字
+ */
+export function round(num, n) {
+  // 处理边界情况
+  if (typeof num !== 'number' || typeof n !== 'number') {
+    throw new Error('参数必须为数字类型');
+  }
+  
+  if (!Number.isInteger(n) || n < 0 || n > 15) {
+    throw new Error('小数位数必须是非负整数且不超过15');
+  }
+  
+  // 处理整数情况
+  if (n === 0) {
+    return Math.round(num);
+  }
+  
+  // 乘以10的n次方，将小数部分转为整数进行处理
+  const multiplier = Math.pow(10, n);
+  
+  // 使用toFixed(15)避免浮点数计算误差
+  const adjustedNum = parseFloat((num * multiplier).toFixed(15));
+  
+  // 进行四舍五入
+  const roundedNum = Math.round(adjustedNum);
+  
+  // 再除以10的n次方转回正确的小数
+  return roundedNum / multiplier;
+}
+

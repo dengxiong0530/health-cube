@@ -1,40 +1,105 @@
 <template>
     <div class="target-list-div">
-          <el-card class="profile-card" shadow="hover">
-        <h3 class="target-list-card-title">Target List</h3>
-        <div class="transactions-list">
-            <div class="transaction-item" v-for="(item, idx) in targetListData" :key="idx"  @click="clickToDetail">
-                <div class="col-name">{{ item.name }}</div>
-                <div class="col-priority" :class="item.priorityClass">{{ item.priority }}</div>
-                <div class="col-budget">{{ item.budget }}</div>
-                <el-icon><ArrowRight /></el-icon>
-                
-               
+        <el-card class="profile-card" shadow="hover">
+            <h3 class="target-list-card-title">Target List</h3>
+            <div class="transactions-list">
+
+                <div class="transaction-item" v-for="(item, idx) in targetListData" :key="idx"
+                    @click="clickToDetail(item, $event)">
+                    <div class="col-name">{{ item.name }}</div>
+                    <div class="col-priority" :class="item.tagClass">{{ item.tag }}</div>
+                    <div class="col-budget">{{ item.tagValue }}</div>
+                    <el-icon>
+                        <ArrowRight />
+                    </el-icon>
+
+
+                </div>
             </div>
-        </div>
         </el-card>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+import { useUserStore } from '@/stores/userStore'
+import { HealthCalculator } from '@/utils/HealthCalculator';
+import { useNavigationStore } from '@/stores/navigationStore';
+import { useUserTargetStore } from '@/stores/userTargetStore'
 
-const targetListData = ref([
-    { name: 'Weight', priority: 'Low', priorityClass: 'low', budget: '67kg' },
-    { name: 'BMI', priority: 'Medium', priorityClass: 'medium', budget: '25.1' },
-    { name: 'Calorie', priority: 'High', priorityClass: 'high', budget: '22.7' },
-    { name: 'Body Fat', priority: 'Critical', priorityClass: 'critical', budget: '23.4' }, 
-    { name: 'Idea Weight', budget: '60kg' } 
-]);
 
-const clickToDetail = () =>{
-   console.log('1111')
+const userDataStore = useUserStore();
+// const weight = computed(() => userDataStore.userInfoStore?.weight || 0)
+const userInfoStore = computed(() => userDataStore?.userInfoStore || {})
+
+const userTargetStore = useUserTargetStore();
+
+const updateTarget = (item) => {
+
+    userTargetStore.upsetTargetStore(item);
+};
+
+const navigationStore = useNavigationStore();
+
+
+
+const clickToDetail = (item, event) => {
+    // console.log(item, event);
+    //  console.log(item,weight);
+    navigationStore.navigateToB(item);
+
 }
+
+
+const targetListData = computed(() => {
+
+
+    const healthCalculator = new HealthCalculator(
+        userInfoStore.value.height,
+        userInfoStore.value.weight,
+        userInfoStore.value.age,
+        userInfoStore.value.gender,
+        userInfoStore.value.waist,
+        userInfoStore.value.hip
+    
+    )
+    const bmiResult = healthCalculator.getBmi();
+    const absiResult = healthCalculator.getABSI();
+    const whrResult =    healthCalculator.getWaistToHip();
+
+    updateTarget({ name: 'Weight', tag: 'Underweight', tagClass: 'low', tagValue: userInfoStore.value.weight });
+    updateTarget(bmiResult);
+    updateTarget(absiResult);
+    updateTarget(whrResult);
+
+
+    clickToDetail(bmiResult); //更新数据后刷新detail页面
+    return [{ name: 'Weight', tag: 'Underweight', tagClass: 'low', tagValue: `${userInfoStore.value.weight} kg` },
+        bmiResult, absiResult,whrResult
+    ]
+
+});
+
+
+
+
+
+// onMounted(() => {
+//     loadData();
+// })
+
+// const loadData = () => {
+//     console.log(targetListData)
+// }
+
+
+
 </script>
 
 <style scoped>
 .target-list-div {
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
 }
 
 .target-list-card-title {
@@ -71,19 +136,23 @@ const clickToDetail = () =>{
     margin-right: 20px;
 }
 
+.lowLess {
+    background-color: #64abf3;
+}
+
 .low {
-    background-color: hsl(194, 93%, 70%);
+    background-color: #1E90FF;
 }
 
 .medium {
-    background-color: #3bf43b;
+    background-color: #32CD32;
 }
 
 .high {
-    background-color: #ff6b6b;
+    background-color: #FFA500;
 }
 
-.critical {
-    background-color: #ff4d4f;
+.obese {
+    background-color: #FF0000;
 }
 </style>

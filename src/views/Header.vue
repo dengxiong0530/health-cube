@@ -1,5 +1,5 @@
 <template>
-	<header >
+	<header>
 		<div class="container">
 			<div class="row m-0">
 				<div class="col-lg-3 col-md-4 col-8 p-0">
@@ -12,14 +12,14 @@
 				<div class="col-lg-9 col-md-8 col-4 p-0">
 					<!-- <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle d-block d-lg-none d-xl-none" type="button"><i class="fa fa-bars"></i>
 				        	</button> -->
-					<div id="menu" class="navbar-collapse collapse">
+					<div id="menu" class="navbar-collapse collapse" v-if="!isMobile">
 						<ul class="nav navbar-nav">
 							<li class="level">
 								<!-- <a href="/" class="page-scroll nav-link" data-scroll>Home</a> -->
-								 <router-link to="/" active-class="current">Home</router-link>
+								<router-link to="/" active-class="current">Home</router-link>
 							</li>
 							<li class="level">
-								 <router-link to="/Dashboard" active-class="current">Dashboard</router-link>
+								<router-link to="/dashboard" active-class="current">Dashboard</router-link>
 							</li>
 							<li class="level">
 								<!-- <a href="/trend" class="page-scroll nav-link" data-scroll>trend</a> -->
@@ -27,39 +27,84 @@
 							</li>
 							<li class="level">
 								<!-- <a href="/test" class="page-scroll nav-link" data-scroll>Test</a> -->
-								<router-link to="/test" active-class="current">test</router-link>
+								<router-link to="/Settings" active-class="current">Settings</router-link>
 							</li>
 						</ul>
 					</div>
-					<div id="div-login">
-						<div v-if="isLoggedIn">
 
-				
-							<el-dropdown >
-								<span class="user-caretBotton-class"
-								>
+					<div class="mobile-nav" v-if="isMobile">
+						<el-dropdown>
+							<span class="user-caretBotton-class">
+								<el-icon style="font-size: 38px; color: #409EFF">
+									<Menu />
+								</el-icon>
+							</span>
+							<template #dropdown>
+								<el-dropdown-menu slot="dropdown" class="mobile-custom-dropdown-menu">
+									<!-- <el-dropdown-item @click="editProfile"><span > <el-icon><Edit /></el-icon>  EditProfile </span></el-dropdown-item> -->
+									<el-dropdown-item><router-link to="/"
+											active-class="current">Home</router-link></el-dropdown-item>
+									<el-dropdown-item><router-link to="/dashboard" active-class="current"> Dashboard
+										</router-link></el-dropdown-item>
+
+									<el-dropdown-item><router-link to="/settings" active-class="current"> Settings
+										</router-link></el-dropdown-item>
+
+								</el-dropdown-menu>
+							</template>
+						</el-dropdown>
+
+					</div>
+
+
+
+
+
+
+
+					<div id="div-login">
+						<div class="class-user-login" v-if="isLoggedIn">
+
+
+							<el-dropdown>
+								<!-- <span class="user-caretBotton-class">
 									<span>
-										<i class="fa fa-user" aria-hidden="true"></i> 
-										{{ user?.email }}</span>
+										<i class="fa fa-user" aria-hidden="true"></i>
+										{{ user?.email }}
+									</span>
 									<el-icon>
 										<CaretBottom />
 									</el-icon>
-								</span>
-								<template #dropdown >
-									<el-dropdown-menu slot="dropdown" class="custom-dropdown-menu" >
-										<!-- <el-dropdown-item @click="editProfile"><span > <el-icon><Edit /></el-icon>  EditProfile </span></el-dropdown-item> -->
-										<el-dropdown-item @click="sginOut"> <span  class="logout-item" > SginOut </span></el-dropdown-item>
+								</span> -->
+								<el-avatar> <el-icon>
+										<User />
+									</el-icon> </el-avatar>
+
+
+								<template #dropdown>
+									<el-dropdown-menu slot="dropdown" split-button="true" class="custom-dropdown-menu">
+										<el-dropdown-item><span class="dropdown-item-user"> Welcome User: <br> {{
+											user?.email }} <br> </span></el-dropdown-item>
+										<el-dropdown-item  ><span> <el-icon>
+													<UserFilled />
+												</el-icon> Edit User </span></el-dropdown-item>
+										<el-dropdown-item> <router-link to="/settings" active-class="current">
+												<span><el-icon>
+														<Setting />
+													</el-icon> Settings </span>
+											</router-link>
+										</el-dropdown-item>
+										<el-dropdown-item @click="sginOut"> <span class="logout-item"> <el-icon>
+													<SwitchButton />
+												</el-icon> SginOut
+											</span></el-dropdown-item>
 									</el-dropdown-menu>
 								</template>
 							</el-dropdown>
-
- 
-
-
-
-
 						</div>
-						<a v-else @click="sginIn">Sign in</a>
+						<a v-else @click="sginIn"> <el-icon>
+								<User />
+							</el-icon> Sign in</a>
 
 					</div>
 				</div>
@@ -70,19 +115,42 @@
 
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted, watch, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth'
-import { CaretBottom } from '@element-plus/icons-vue'
-
+import { Setting, Menu, User, UserFilled,SwitchButton } from '@element-plus/icons-vue'
 const router = useRouter();
 const authStore = useAuthStore()
-
 const user = authStore.user
-
 const isLoggedIn = computed(() => !!authStore.user)
 
 // const isActive = (path) => router.path === path;
+const isMobile = ref(false);
+
+const checkScreenSize = () => {
+	isMobile.value = window.innerWidth < 900;
+};
+
+// 导航方法
+const navigateTo = (path) => {
+	router.push({ name: path });
+};
+
+// 监听窗口大小变化
+onMounted(() => {
+	checkScreenSize();
+	window.addEventListener('resize', checkScreenSize);
+});
+
+// 组件卸载时移除监听器
+watch(() => isMobile.value, (newVal) => {
+	// 可以在这里添加切换动画逻辑
+});
+
+// 清理
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', checkScreenSize);
+});
 
 const sginIn = () => {
 	router.push('/login');  // 跳转到登录页
@@ -102,16 +170,18 @@ const sginOut = () => {
 </script>
 
 <style scoped>
-
 .current {
-  color: #fb4275; 
-  
+	color: #fb4275;
+
 }
 
+.class-user-login {
+	margin-top: -10px;
+}
 
 #div-login {
 	position: absolute;
-	right: -10px;
+	right: 0px;
 	top: 0px;
 	padding: 7px 18px !important;
 	/* display: inline-block; */
@@ -128,17 +198,42 @@ const sginOut = () => {
 }
 
 .el-dropdown-item {
-  padding: 10px;
+	padding: 10px;
 }
+
 .logout-item {
-  width: 220px;  /* 控制线条长度 */
-  border-top: 1px solid #c0bdbd;
-  text-align: center;
+	width: 220px;
+	/* 控制线条长度 */
+	border-top: 2px solid #c0bdbd;
+	text-align: center;
+	margin-top: 10px;
 }
+
+.dropdown-item-user {
+	width: 220px;
+	border-bottom: 2px solid #c0bdbd;
+	margin-bottom: 10px;
+}
+
 .custom-dropdown-menu {
-  width: 220px; /* 设置下拉菜单宽度 */
-  font-size: 15px; /* 设置字体大小 */
+	width: 220px;
+	/* 设置下拉菜单宽度 */
+	font-size: 15px;
+	/* 设置字体大小 */
+	padding: 10px 5px;
 
 }
 
+.mobile-custom-dropdown-menu {
+	width: 150px;
+	/* 设置下拉菜单宽度 */
+	font-size: 15px;
+	/* 设置字体大小 */
+}
+
+.mobile-nav .el-dropdown {
+	height: 100%;
+	margin-top: 0px;
+
+}
 </style>

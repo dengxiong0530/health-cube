@@ -1,129 +1,189 @@
 <template>
-    <div id="div-target">
-   
+    <div class="div-target-detail" ref="targetDetailDiv">
 
-                <el-card class="target-card-right" shadow="hover">
-                    <h4>Target Detail</h4>
-                    <el-row :gutter="2">
-                        <el-button color="#626aef" @click="handleClick(1)">Weight</el-button>
-                        <el-button color="#626aAf" @click="handleClick(2)">BMI</el-button>
-                        <el-button color="#626aAf" @click="handleClick(3)">Calorie</el-button>
-                    </el-row>
-                    <el-row><el-card class="target-card-detail" shadow="hover">
-                            <span class="class-span-call">{{ v_call }}</span>
-                            <h2>70 kg</h2>
-                            <el-steps :active="v_step" finish-status="success" process-status="process">
-                                <el-step title="sept1" />
-                                <el-step title="sept2" />
-                                <el-step title="Step3" />
-                                <el-step title="Step4" />
-                                <el-step title="Step5" />
-                                <el-step title="Step6" />
-                            </el-steps>
-                            <el-text class="mx-2" type="info" size="large"> 
-                                {{targetJson.desc}}
-                            </el-text>
-                        </el-card> </el-row>
-                    <el-row>
-                        <el-card class="target-card-detail class-span-call" shadow="hover">
-                            <h3>index analysis</h3>
-                            <el-text class="mx-2" type="info" size="large">
-                                {{targetJson.indexAnalysis}}
-                            </el-text>
-                            <el-divider />
-                            <h3>Exercise suggestions</h3>
-                            <el-text class="mx-2" type="info" size="large">
-                                {{targetJson.exerciseSuggestions}}
-                            </el-text>
-                            <el-divider />
-                            <h3>Dietary advice</h3>
-                            <el-text class="mx-2" type="info" size="large">
-                                {{targetJson.DietaryAdvice}}
-                            </el-text>
+        <el-card class="target-card-right" shadow="hover">
+            <h3>Target Detail</h3>
+            <el-row :gutter="2">
+                <el-button color="#626aAf" size="small"
+                    @click="handleClick(getTargetStore('Weight'))">Weight</el-button>
+                <el-button color="#626aAf" size="small" @click="handleClick(getTargetStore('BMI'))">BMI</el-button>
+                <el-button color="#626aAf" size="small" @click="handleClick(getTargetStore('ABSI'))">ABSI</el-button>
+                <el-button color="#626aAf" size="small" @click="handleClick(getTargetStore('WHR'))">WHR</el-button>
 
-                        </el-card>
-                    </el-row>
+            </el-row>
+            <el-row><el-card class="target-card-detail" shadow="hover">
+                    <span class="class-span-call">{{ v_call }}</span>
+                    <h2 class="class-tag-value">{{ tagValue }}</h2>
+
+                    <!-- <ProgressIndicator value="Normal" name="BMI" /> -->
+
+                    <ProgressIndicator :value="tag" :name="targetName" />
+
+                    <el-text class="target-dt-text" type="info" size="default">
+                        {{ targetJson.desc }}
+                    </el-text>
+                </el-card> </el-row>
+            <el-row>
+                <el-card class="target-card-detail class-span-call" shadow="hover">
+                    <h3>index analysis</h3>
+                    <el-text class="target-dt-text" type="info" size="default">
+
+                        {{ targetJson.indexAnalysis[tag] }}
+                    </el-text>
+                    <el-divider />
+                    <h3>Exercise suggestions</h3>
+                    <el-text class="target-dt-text" type="info" size="default">
+                        {{ targetJson.exerciseSuggestions[tag] }}
+                    </el-text>
+                    <el-divider />
+                    <h3>Dietary advice</h3>
+                    <el-text class="target-dt-text" type="info" size="large">
+                        {{ targetJson.DietaryAdvice[tag] }}
+                    </el-text>
+
                 </el-card>
-          
+            </el-row>
+        </el-card>
+
     </div>
+
 
 </template>
 
 <script setup>
-import { ref,computed } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import tragetData from '@/data/target.json'
+import { useNavigationStore } from '@/stores/navigationStore';
+import { useUserTargetStore } from '@/stores/userTargetStore'
+import ProgressIndicator from '@/components/ProgressIndicator.vue';
+const navigationStore = useNavigationStore();
+const userTargetStore = useUserTargetStore();
+
+const v_call = ref("Your Weight:");
+const targetName = ref('Weight');
+const targetJson = ref(getTargetObject(targetName.value));
+
+const targetStore = ref(getTargetStore('Weight'));
+const tag = ref(targetStore.value.tag);
+const tagValue = ref(targetStore.value.tagValue);
 
 
-const v_step = ref(3);
-const v_call = ref("Your weight:");
-const targetName = ref('dome');
-const targetJson = ref("");
-const v_description = ref(targetJson.value.desc);
+
 function getTargetObject(name) {
-    return  tragetData.find(item=> item.targetName === name)|| {};
+    return tragetData.find(item => item.targetName === name) || {};
 }
 
-const handleClick = (index) => {
-    switch (index) {
-        case 1:
-            v_call.value = "Your weight:";
-            targetName.value = "weight";
-            targetJson.value = getTargetObject(targetName.value);
-         
+function getTargetStore(name) {
+    return userTargetStore.targets.find(item => item.name === name) || {};
+}
+
+const handleClick = (item) => {
+
+    targetName.value = item.name;
+    tagValue.value = item.tagValue;
+    tag.value = item.tag;
+    targetJson.value = getTargetObject(targetName.value);
+    // console.log(tag.value,targetName.value)
+
+    switch (item.name) {
+        case 'Weight':
+            v_call.value = "Your Weight:";
             break;
-        case 2:
-            targetName.value = 'BMI';
+        case 'BMI':
             v_call.value = "Your BMI:";
-            console.log(v_description.value);
             break;
-        case 3:
-            targetName.value = 'Calorie';
+        case 'ABSI':
+            v_call.value = "Your A Body Shape Index:";
+            break;
+        case 'WHR':
+            v_call.value = "Your Waist-to-Hip Ratio:";
             break;
         default:
-            targetName.value = 'weitht';
+            v_call.value = "Your Weight:";
+
             break;
     }
-    console.log(`点击了第${index}列`);
+    // console.log(`点击了第${item}列` );
     // 这里可以执行你需要的操作
+
 }
+
+const targetDetailDiv = ref(null);
+const offset = -150;
+const receiveList = (item) => {
+    handleClick(item);
+    if (targetDetailDiv.value) {
+        const targetPosition = targetDetailDiv.value.getBoundingClientRect().top + window.pageYOffset + offset;
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// 监听导航状态变化
+watch(
+    () => navigationStore.shouldNavigate,
+    (shouldNavigate) => {
+        if (shouldNavigate) {
+            // 获取传递的参数并执行方法
+            const { selectedItem } = navigationStore;
+            if (selectedItem !== null) {
+                receiveList(selectedItem);
+            }
+
+            // 重置导航状态
+            navigationStore.resetNavigation();
+        }
+    },
+    { immediate: false }
+);
+
+// 组件挂载时检查是否有预传递的参数
+onMounted(() => {
+    if (navigationStore.shouldNavigate) {
+        const { selectedItem } = navigationStore;
+        if (selectedItem !== null) {
+            receiveList(selectedItem);
+            navigationStore.resetNavigation();
+        }
+    }
+});
 
 </script>
 
-<style>
-#div-target {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 10px;
-
+<style scoped>
+.div-target-detail {
+    margin-bottom: 10px;
 }
 
-.target-list-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
 
-}
 
 .target-card-right .el-card__body>div {
     margin-bottom: 25px;
     /* 元素之间的垂直间距 */
 }
 
-.target-card-detail{
+.target-card-detail {
     width: 100%;
 }
 
 .target-card-right .el-card__body>div:last-child {
-    margin-bottom: 0px;
+    /* margin-bottom: 0px; */
     /* 最后一个元素不添加底部间距 */
 }
 
 .class-span-call {
-    display: block;
+    /* display: block; */
     /* 让span独占一行 */
+    /* text-align: left; */
+}
+
+.target-dt-text {
     text-align: left;
+}
+
+.class-tag-value {
+    text-align: center;
 }
 </style>

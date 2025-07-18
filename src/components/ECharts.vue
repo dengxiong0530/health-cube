@@ -85,6 +85,6 @@ onUnmounted(() => {
 
 <style scoped>
 div {
-  min-height: 300px;
+  min-height: 250px;
 }
 </style>

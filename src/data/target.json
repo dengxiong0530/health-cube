@@ -1,68 +1,112 @@
 [
     {
-        "targetName": "dome",
-        "desc": "aaa.",
+        "targetName": "",
+        "desc": "",
         "indexAnalysis": {
             "low": "",
             "meddium": "",
             "height": "",
-            "critical": ""
+            "Obese": ""
         },
         "exerciseSuggestions": {
             "low": "",
             "meddium": "",
             "height": "",
-            "critical": ""
+            "Obese": ""
         },
         "DietaryAdvice": {
             "low": "",
             "meddium": "",
             "height": "",
-            "critical": ""
+            "Obese": ""
         }
     },
     {
-        "targetName": "weight",
+        "targetName": "Weight",
         "desc": "体重是什么xxxxxx巴拉巴拉",
         "indexAnalysis": {
-            "low": "您的体重太轻了，多吃点",
-            "meddium": "标准身材啊。。。",
-            "height": "体重偏高哦",
-            "critical": "肥胖了兄弟啊"
+            "Underweight": "您的体重太轻了，多吃点",
+            "Normal": "标准身材啊。。。",
+            "Overweight": "体重偏高哦",
+            "Obesity": "肥胖了兄弟啊"
         },
-        "exerciseSuggestions":  {
-            "low": "多吃点拉，别减肥",
-            "meddium": "保持",
-            "height": "要减肥了",
-            "critical": "必须减肥"
+        "exerciseSuggestions": {
+            "Underweight": "多吃点拉，别减肥",
+            "Normal": "保持",
+            "Overweight": "要减肥了",
+            "Obesity": "必须减肥"
         },
-        "DietaryAdvice":  {
-            "low": "多吃点拉",
-            "meddium": "保持",
-            "height": "要减肥了，少吃点",
-            "critical": "必须减肥，控糖了"
+        "DietaryAdvice": {
+            "Underweight": "多吃点拉",
+            "Normal": "保持",
+            "Overweight": "要减肥了，少吃点",
+            "Obesity": "必须减肥，控糖了"
         }
     },
     {
         "targetName": "BMI",
-        "desc": "BMI is a measurement of a person's leanness or corpulence based on their height and weight, and is intended to quantify tissue mass. It is widely used as a general indicator of whether a person has a healthy body weight for their height. Specifically, the value obtained from the calculation of BMI is used to categorize whether a person is underweight, normal weight, overweight, or obese depending on what range the value falls between. ",
-          "indexAnalysis": {
-            "low": " It is widely used as a general indicator of whether a person has a healthy body weight for their height. Specifically",
-            "meddium": "These ranges of BMI vary based on factors such as region and age, and are sometimes further divided into subcategories such as severely underweight or very severely obese.",
-            "height": "Being overweight or underweight can have significant health effects, so while BMI is an imperfect measure of healthy body weight, it is a useful indicator of whether any additional testing or action is required",
-            "critical": "Refer to the table below to see the different categories based on BMI that are used by the calculator"
+        "desc": "Body Mass Index (BMI) is a simple tool used to assess whether a person is within a healthy weight range. By using a BMI calculator, you can quickly determine your BMI value, which helps evaluate your weight status.  This index is widely used to screen for underweight, normal weight, overweight, or obesity.",
+        "indexAnalysis": {
+            "Underweight": "Malnutrition: People who are underweight are more prone to malnutrition, which can lead to weakened immunity and increased risk of infections.",
+            "Normal": "Individuals with a normal weight are generally at a lower health risk level but still need to maintain a healthy lifestyle to prevent weight gain and related diseases.",
+            "Overweight": "Overweight individuals face higher risks of chronic diseases such as high blood pressure, type 2 diabetes, and heart disease.They may experience breathing problems, such as sleep apnea.",
+            "Obesity": "Obese individuals are at a higher risk for health issues such as cardiovascular disease, type 2 diabetes, certain cancers, and fatty liver disease.Obesity can also lead to joint problems like osteoarthritis and other weight-related health issues."
         },
         "exerciseSuggestions": {
-            "low": "Being overweight increases the risk of a number of serious diseases and health conditions.",
-            "meddium": "Generally, an increased risk of mortality compared to those with a healthy BMI",
-            "height": "Higher levels of LDL cholesterol, which is widely considered bad cholesterol, lower levels of HDL cholesterol, considered to be good cholesterol in moderation, and high levels of triglycerides",
-            "critical": "Higher levels of LDL cholesterol, which is widely considered bad cholesterol, lower levels of HDL cholesterol, considered to be good cholesterol in moderation, and high levels of triglycerides"
+            "Underweight": "Strength Training: Moderate strength training helps build muscle mass, which can increase weight and improve body composition.",
+            "Normal": "Regular Exercise: Engage in at least 150 minutes of moderate-intensity exercise weekly, such as brisk walking, running, or cycling, to maintain cardiovascular health.",
+            "Overweight": "Increase Physical Activity: Engage in at least 300 minutes of moderate-intensity exercise or 150 minutes of high-intensity exercise weekly to aid in weight loss.",
+            "Obesity": "Regular Exercise: Combine aerobic exercise with strength training, aiming for at least 300 minutes of exercise weekly to promote weight loss and boost metabolism."
         },
         "DietaryAdvice": {
-            "low": "Being overweight increases the risk of a number of serious diseases and health conditions.",
-            "meddium": "Generally, an increased risk of mortality compared to those with a healthy BMI",
-            "height": "Higher levels of LDL cholesterol, which is widely considered bad cholesterol, lower levels of HDL cholesterol, considered to be good cholesterol in moderation, and high levels of triglycerides",
-            "critical": "Higher levels of LDL cholesterol, which is widely considered bad cholesterol, lower levels of HDL cholesterol, considered to be good cholesterol in moderation, and high levels of triglycerides"
+            "Underweight": "Increase Nutritional Intake: Eat more nutrient-rich foods like whole grains, proteins, healthy fats, and a variety of vitamins and minerals from fruits and vegetables.",
+            "Normal": "Maintain a Balanced Diet: Continue healthy eating habits to ensure sufficient intake of proteins, carbohydrates, healthy fats, and a variety of fruits and vegetables.",
+            "Overweight": "Adjust Eating Habits: Reduce high-calorie food intake and increase fiber-rich foods (like whole grains, vegetables, and fruits) to help control weight.",
+            "Obesity": "Dietary Management: Follow a low-calorie, low-fat diet, increase protein and fiber intake, and reduce processed foods, sugar, and saturated fat consumption."
+        }
+    },
+    {
+        "targetName": "ABSI",
+        "desc": "ABSI (A Body Shape Index) is a metric designed to assess abdominal fat distribution, addressing the limitations of traditional BMI (Body Mass Index). While BMI considers only height and weight, it doesn’t account for how fat is distributed throughout the body, particularly around the abdomen. Excess abdominal fat is closely linked to various health risks, including cardiovascular diseases and diabetes. ABSI provides a more comprehensive perspective for evaluating health risks.",
+        "indexAnalysis": {
+            "Very Low": "Your body shape index is significantly below average, with low health risks.",
+            "Low Risk": "Your body shape index is slightly below average, with minimal health risks.",
+            "Average": "Your body shape index is close to average, with typical health risks.",
+            "High Risk": "Your body shape index is above average, suggesting increased health risks.",
+            "Very High": "Your body shape index is significantly above average, indicating high risks."
+        },
+        "exerciseSuggestions": {
+            "Very Low Risk": "",
+            "Low Risk": "",
+            "Average Risk": "",
+            "High Risk": "",
+            "Very High Risk": ""
+        },
+        "DietaryAdvice": {
+            "Very Low Risk": "",
+            "Low Risk": "",
+            "Average Risk": "",
+            "High Risk": "",
+            "Very High Risk": ""
+        }
+    },
+    {
+        "targetName": "WHR",
+        "desc": "Waist-to-Hip Ratio  is a key indicator used to assess how fat is distributed in the body. It’s calculated by comparing the circumference of your waist to that of your hips, giving insights into where fat accumulates, especially around the abdomen. ",
+        "indexAnalysis": {
+            "Normal": "Your waist - to - hip ratio is normal. Please keep it up.",
+            "Moderate Risk": "The insulin resistance level of people at moderate risk may increase by 15% - 20% compared with that of healthy people, and the fasting blood glucose and triglyceride indicators start to fluctuate.",
+            "High Risk": "In high - risk groups, inflammatory factors (such as TNF - α, IL - 6) secreted by visceral fat can interfere with insulin signal transduction, increasing the risk of diabetes by 2 - 3 times.The accumulation of abdominal fat can also compress the abdominal cavity space, increasing the incidence of dyslipidemia by 40% and the risk of hypertension by 50%."
+        },
+        "exerciseSuggestions": {
+            "Normal": "Your waist - to - hip ratio is normal. Please keep it up.",
+            "Moderate Risk": "Mix different types of cardio, such as running, swimming, or cycling, and aim to exercise at least 5 days a week for at least 30 minutes per session.Incorporate at least 2 sessions of strength training per week, focusing on exercises like squats, deadlifts, planks, and sit-ups that target your hips, waist, and abdomen.",
+            "High Risk": "Mix different types of cardio, such as running, swimming, or cycling, and aim to exercise at least 5 days a week for at least 30 minutes per session.Incorporate at least 2 sessions of strength training per week, focusing on exercises like squats, deadlifts, planks, and sit-ups that target your hips, waist, and abdomen."
+        },
+        "DietaryAdvice": {
+            "Normal": "Your waist - to - hip ratio is normal. Please keep it up.",
+            "Moderate Risk": "Incorporate more fiber-rich foods like whole grains, vegetables, and fruits, and replace unhealthy fats with unsaturated fats, such as olive oil or omega-3 fatty acids from fish.",
+            "High Risk": "Incorporate more fiber-rich foods like whole grains, vegetables, and fruits, and replace unhealthy fats with unsaturated fats, such as olive oil or omega-3 fatty acids from fish."
         }
     }
 ]
