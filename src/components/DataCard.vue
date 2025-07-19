@@ -3,8 +3,12 @@
     class="custom-stat-card" 
     :style="{ backgroundColor: cardColor, borderRadius: '16px' }"
   >
+    
     <div class="stat-title" >{{ title }}</div>
+    <div class="value-and-unit">
     <div class="stat-value">{{ value }}</div>
+    <div class="stat-unit">{{ valueUnit }}</div>
+    </div>
 
   </el-card>
 </template>
@@ -21,10 +25,15 @@ defineProps({
     type: [String, Number],
     required: true
   },
+  valueUnit: {
+    type: [String],
+    default: 'cm'
+  },
   cardColor: {
     type: String,
     default: '#646cff' // 默认蓝色，可通过props修改
   }
+
 });
 </script>
 
@@ -48,7 +57,11 @@ defineProps({
   margin-bottom: 8px;
   text-align: center;
   font-family: "Nunito", sans-serif;
-  
+}
+
+.value-and-unit {
+  display: flex;          /* 启用 Flexbox */
+  gap: 10px;    
 }
 
 

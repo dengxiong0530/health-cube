@@ -6,8 +6,17 @@ export const useUserStore = defineStore('user', () => {
     const userInfoStore = ref(null)
     const loading = ref(true);
 
-    const fetchUserInfo = async (userId) => {
+    const fetchUserInfo = async (userId,forceRefresh = false) => {
+
+        if (!forceRefresh && userInfoStore.value) {
+            console.log('Using cached user data');
+            return userInfoStore.value;
+        }
+        
+
+
         loading.value = true;
+
         try {
             const { data, error } = await supabase
                 .from('user_info')

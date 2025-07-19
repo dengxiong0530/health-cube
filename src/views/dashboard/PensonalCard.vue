@@ -4,25 +4,33 @@
             <h3>Welcome to Health Cubes !</h3>
            
             <div class="class-data-card">
-
+             
+                <div v-if="height" class="grid grid-cols-2 gap-4">
+              
                 <el-row :gutter="25">
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
-                        <DataCard title="Your Height is" value={{userInfo.value.age}}    cardColor="#7DA0FA" />
+                    <el-col :xs="6" :sm="6" :md="6" :lg="5" :xl="6">
+                        <DataCard title=" Height " :value= "height" valueUnit="cm"  cardColor="#7DA0FA" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
-                        <DataCard title="Your Weight is" value="167 cm" cardColor="#7978E9" />
+                    <el-col :xs="6" :sm="6" :md="6" :lg="5" :xl="6">
+                        <DataCard title=" Weight " :value= "weight" valueUnit="kg" cardColor="#7978E9" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
-                        <DataCard title="Your Waist is" value="67 cm" cardColor="#4747A1" />
+                    <el-col :xs="6" :sm="6" :md="6" :lg="5" :xl="6">
+                        <DataCard title=" Waist " :value= "waist" valueUnit="cm" cardColor="#4747A1" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
-                        <DataCard title="Your Hip is" value="80 cm" cardColor="#F3797E" />
+                    <el-col :xs="6" :sm="6" :md="6" :lg="5" :xl="6">
+                        <DataCard title=" Hip " :value= "hip" valueUnit="cm" cardColor="#F3797E" />
+                    </el-col>
+
+                    <el-col :xs="6" :sm="6" :md="6" :lg="4" :xl="6">
+                        <DataCard title=" Neck " :value= "neck" valueUnit="cm" cardColor="#f2a654" />
                     </el-col>
 
                 </el-row>
+</div>
+                <div v-else> Loading user data...</div>
 
             </div>
              <span> Here is your basic information. We will calculate your health indicators based on this information. You can click the button below to go to the information modification page. </span>
@@ -48,7 +56,7 @@ import DataCard from '@/components/DataCard.vue';
 import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/userStore'
 
-import { ref, onMounted} from 'vue'
+import { ref, onMounted,computed} from 'vue'
 
 const authStore = useAuthStore()
 const userId = authStore.user.id
@@ -56,21 +64,41 @@ const userDataStore = useUserStore()
 
 const userInfo = ref({})
 
+const height = computed(() => {
+  return userInfo.value?.height || 'N/A'; // 使用可选链和默认值
+});
+
+const weight = computed(() => {
+  return userInfo.value?.weight || 'N/A'; // 使用可选链和默认值
+});
+
+
+const hip = computed(() => {
+  return userInfo.value?.hip || 'N/A'; // 使用可选链和默认值
+});
+
+
+const waist = computed(() => {
+  return userInfo.value?.waist || 'N/A'; // 使用可选链和默认值
+});
+
+const neck = computed(() => {
+  return userInfo.value?.neck || 'N/A'; // 使用可选链和默认值
+});
+
+
 
 
 const fetchUserInfo = async () => {
-  userInfo.value =   await userDataStore.fetchUserInfo(userId)
-  
-    // console.log(userInfo)
+    userInfo.value   =  await userDataStore.fetchUserInfo(userId)
 }
 
 
-onMounted(() => {
-    fetchUserInfo();
-    console.log(userInfo.age)
+onMounted( async () => {
+    await fetchUserInfo();
+    console.log(userInfo.value.height)
     console.log(userInfo.value)
     console.log(userInfo)
-
 })
 </script>
 <style scoped>
