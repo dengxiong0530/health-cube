@@ -59,6 +59,39 @@ export const useAuthStore = defineStore('auth', {
       const { data: { user } } = await supabase.auth.getUser()
       this.user = user
     },
+
+    // 新增：更新用户密码
+    async updateUser({ password }, { currentPassword }) {
+      this.loading = true
+      this.error = null
+
+      try {
+        // 简化版：直接调用 Supabase 更新密码 API
+        const { error } = await supabase.auth.updateUser({
+          password: password
+        }, {
+          currentPassword: currentPassword
+        })
+
+        if (error) {
+          this.error = error.message
+          console.error('更新密码失败:', error)
+          return { error }
+        }
+
+        // 更新成功
+        this.error = null
+        return { data: { user: this.user } }
+      } catch (err) {
+        this.error = '更新密码时发生错误'
+        console.error('更新密码异常:', err)
+        return { error: err }
+      } finally {
+        this.loading = false
+      }
+    },
+
+
     
     // 路由跳转
     redirectToDashboard() {
