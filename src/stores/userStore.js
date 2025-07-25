@@ -1,18 +1,21 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { supabase } from '@/utils/supabase'
+import { round } from '@/utils/common'
+
+
 
 export const useUserStore = defineStore('user', () => {
     const userInfoStore = ref(null)
     const loading = ref(true);
 
-    const fetchUserInfo = async (userId,forceRefresh = false) => {
+    const fetchUserInfo = async (userId, forceRefresh = false) => {
 
-        if (!forceRefresh && userInfoStore.value) {
-            console.log('Using cached user data');
-            return userInfoStore.value;
-        }
-        
+        // if (!forceRefresh && userInfoStore.value) {
+        //     console.log('Using cached user data');
+        //     return userInfoStore.value;
+        // }
+
 
 
         loading.value = true;
@@ -57,13 +60,13 @@ export const useUserStore = defineStore('user', () => {
                 .upsert(
                     {
                         user_id: userId,
-                        age: data.value.age,
+                        age: round(data.value.age, 0),
                         gender: data.value.gender,
-                        height: data.value.height,
-                        weight: data.value.weight,
-                        waist: data.value.waist,
-                        hip: data.value.hip,
-                        neck: data.value.neck,
+                        height: round(data.value.height, 1),
+                        weight: round(data.value.weight, 1),
+                        waist: round(data.value.waist, 1),
+                        hip: round(data.value.hip, 1),
+                        neck: round(data.value.neck, 1),
                         updated_at: currentDate
                     },
                     { onConflict: 'user_id' }
@@ -84,6 +87,41 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
+
+    const updateWeight = async (weight, userId) => {
+        loading.value = true;
+
+        try {
+
+
+            const currentDate = new Date().toISOString()
+            const { error } = await supabase
+                .from('user_info')
+                .update(
+                    {
+                    
+                        weight: round(weight, 1),
+                        updated_at: currentDate
+                    }
+                ).eq('user_id', userId) 
+              
+
+            if (error) {
+                throw error
+            }
+
+            ElMessage.success('save successfully')
+        } catch (error) {
+            console.error('fail to save:', error)
+            ElMessage.error(error.message || 'fail to save')
+        } finally {
+            // cancelEditing()
+            loading.value = false;
+        }
+
+
+
+    }
     const useUserInfoStore = () => {
         return computed(() => userInfoStore.value);
     };
@@ -92,6 +130,7 @@ export const useUserStore = defineStore('user', () => {
         userInfoStore,
         fetchUserInfo,
         upsetUserInfo,
+        updateWeight,
         useUserInfoStore
 
     }

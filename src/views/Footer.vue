@@ -16,9 +16,9 @@
 									<div class="contact-footer">
 										<p class="footer-p">350 5th Ave,New York, <br>NY 1011810, Firs Avenue, Muswell Hill</p>
 										<ul>
-											<li><a href="tel:+91123456789">+91 123 456 789</a></li>
-											<li>|</li>
-											<li><a href="#">info@example.com</a></li>
+											<!-- <li><a href="tel:+91123456789">+91 123 456 789</a></li> -->
+											<!-- <li>|</li> -->
+											<li>support@healthcubes.top</li>
 										</ul>
 									</div>
 								</div>

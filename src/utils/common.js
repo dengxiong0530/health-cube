@@ -262,3 +262,52 @@ export function round(num, n) {
   return roundedNum / multiplier;
 }
 
+
+
+/**
+ * 生成指定时间段的开始日期和结束日期
+ * @param {string} period 时间段类型，可选值：'7d'|'30d'|'90d'|'180d'
+ * @returns {Object} { startDate, endDate } 格式为 'yyyy-MM-dd' 的日期字符串
+ */
+export const getDateRange = (period) => {
+  // 获取当前日期（结束日期）
+  const endDate = new Date();
+  
+  // 根据时间段计算开始日期
+  const startDate = new Date();
+  
+  switch (period) {
+    case '7d':
+      // 近7日：开始日期 = 今天 - 6天（包含今天共7天）
+      startDate.setDate(endDate.getDate() - 6);
+      break;
+    case '30d':
+      // 近30日：开始日期 = 今天 - 29天
+      startDate.setDate(endDate.getDate() - 29);
+      break;
+    case '90d':
+      // 近90日：开始日期 = 今天 - 89天
+      startDate.setDate(endDate.getDate() - 89);
+      break;
+    case '180d':
+      // 近180日：开始日期 = 今天 - 179天
+      startDate.setDate(endDate.getDate() - 179);
+      break;
+    default:
+      throw new Error('Invalid time - period parameter. Please use: \'7d\'|\'30d\'|\'90d\'|\'180d\'.');
+  }
+  
+  // 格式化日期为 'yyyy-MM-dd'
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需+1
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+  
+  return {
+    startDate: formatDate(startDate),
+    endDate: formatDate(endDate)
+  };
+};
+

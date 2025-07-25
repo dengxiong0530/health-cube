@@ -1,24 +1,24 @@
 <template>
     <div id='dashbord' class="center-sm">
         <el-row class='one-row' :gutter="55">
-            <el-col class="one-row-col" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+            <el-col class="one-row-col" :xs="20" :sm="20" :md="8" :lg="8" :xl="8">
                 <BmiChart />
             </el-col>
-            <el-col class="one-row-col" :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
+            <el-col class="one-row-col" :xs="20" :sm="20" :md="16" :lg="16" :xl="16">
                 <PensonalCard/>
             </el-col>
             <!-- <el-col :span="8" class="one-row-col"><el-card style="max-width: 100%"></el-card> </el-col> -->
         </el-row>
 
         <el-row class='two-row' :gutter="55">
-            <el-col class="one-row-col" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+            <el-col class="one-row-col" :xs="20" :sm="20" :md="8" :lg="8" :xl="8">
                 
 
                 <TargetList />
                 <!-- <PersonalDetails /> -->
 
             </el-col>
-            <el-col class="one-row-col" :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
+            <el-col class="one-row-col" :xs="20" :sm="20" :md="16" :lg="16" :xl="16">
 
                 <TargetDetails />
 

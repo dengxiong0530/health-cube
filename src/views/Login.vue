@@ -23,7 +23,8 @@
                                 <input type="checkbox" id="remenber" name="remenber" value="remenber" v-model="loginForm.rememberMe">
                                 <label for="remenber"> Remember me?</label>
                             </div>
-                            <a href="#url" class="forgot">Forgot password?</a>
+                            <!-- <a href="#url" class="forgot">Forgot password?</a> -->
+                             <router-link  class="forgot" to="/forgot-password"  >Forgot password?</router-link>
                         </div>
                         <button class="btn btn-primary btn-block" type="submit"   v-loading="loading"  >Sign in</button>
                     
@@ -55,9 +56,7 @@
                         
                     </div>
          
-                    <!-- <div class="form-row bottom">
-                        <a href="#url" class="forgot">Forgot password?</a>
-                    </div> -->
+                 
                     <button class="btn btn-primary btn-block" type="submit"  v-loading="signUploading" > Create account</button>
                 </el-form>
                 <!-- <p class="continue"><span></span></p> -->

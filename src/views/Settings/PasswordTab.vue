@@ -37,7 +37,8 @@
         <el-button
           type="primary"
           class="submit-btn"
-          :disabled="!isFormValid"
+          :disabled="!isFormValid" 
+          native-type="submit"
           >Change Password</el-button
         >
       </form>
@@ -89,7 +90,7 @@
   
   // 提交修改密码
   const handleChangePassword = async () => {
-    console.log(isFormValid.value);
+    console.log(isFormValid.value,111111);
   if (!isFormValid.value) return
 
   try {

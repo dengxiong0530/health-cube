@@ -8,25 +8,25 @@
                 <div v-if="height" class="grid grid-cols-2 gap-4">
               
                 <el-row :gutter="25">
-                    <el-col :xs="6" :sm="6" :md="6" :lg="5" :xl="6">
+                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
                         <DataCard title=" Height " :value= "height" valueUnit="cm"  cardColor="#7DA0FA" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="5" :xl="6">
+                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
                         <DataCard title=" Weight " :value= "weight" valueUnit="kg" cardColor="#7978E9" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="5" :xl="6">
+                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
                         <DataCard title=" Waist " :value= "waist" valueUnit="cm" cardColor="#4747A1" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="5" :xl="6">
+                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
                         <DataCard title=" Hip " :value= "hip" valueUnit="cm" cardColor="#F3797E" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="4" :xl="6">
+                    <!-- <el-col :xs="6" :sm="6" :md="6" :lg="4" :xl="6">
                         <DataCard title=" Neck " :value= "neck" valueUnit="cm" cardColor="#f2a654" />
-                    </el-col>
+                    </el-col> -->
 
                 </el-row>
 </div>
@@ -96,9 +96,9 @@ const fetchUserInfo = async () => {
 
 onMounted( async () => {
     await fetchUserInfo();
-    console.log(userInfo.value.height)
-    console.log(userInfo.value)
-    console.log(userInfo)
+    // console.log(userInfo.value.height)
+    // console.log(userInfo.value)
+    // console.log(userInfo)
 })
 </script>
 <style scoped>

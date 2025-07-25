@@ -1,10 +1,10 @@
 <template>
-    <div id = "div-settings"> 
+    <div id="div-settings">
 
- <!-- <PersonalDetails/> -->
-  <el-card>
- <Profile/>
- </el-card>
+        <!-- <PersonalDetails/> -->
+        <el-card shadow="hover">
+            <Profile />
+        </el-card>
     </div>
 
 
@@ -14,12 +14,10 @@ import PersonalDetails from '@/views/dashboard/PersonalDetails.vue'
 import Profile from '@/views/Settings/Profile.vue'
 </script>
 <style scoped>
-
 #div-settings {
     margin-left: 20%;
     margin-top: 120px;
     width: 60%;
 
 }
-
 </style>

@@ -245,7 +245,7 @@ h6 {
 
 .btn, button {
 	background-color: transparent;
-	padding: 18px 26px;
+	/* padding: 18px 26px; */
 	font-size: 14px;
 	line-height: 16px;
 	font-weight: 400;

@@ -11,11 +11,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import ECharts from '@/components/ECharts.vue'
+import { useUserTargetStore } from '@/stores/userTargetStore'
+const userTargetStore = useUserTargetStore();
+
+const bmi =  computed(() => {
+
+    // console.log( userTargetStore.targets.find(item => item.name === 'BMI'))
+     
+    return  userTargetStore.targets.find(item => item.name === 'BMI')?.tagValue || {};
+    // return '';
+     
+});
 
 
-const bmi = 24.9;
+// userTargetStore.targets.find(item => item.name === name) || {};
 
 const chartOptions = ref({
     series: [

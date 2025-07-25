@@ -7,7 +7,9 @@ import Dashboard from '@/views/dashboard/Dashboard.vue'
 import TEST from '@/views/test.vue'
 
 import Settings from '@/views/Settings/Settings.vue'
-
+import Trend from '@/views/trend/Trend.vue'
+import ForgotPassword from '@/views/ForgotPassword.vue'
+import ResetPassword from '@/views/ResetPassword.vue'
 
 
 const routes = [
@@ -27,24 +29,51 @@ const routes = [
     name: 'TEST',
     component: TEST
   },
- 
+
   {
 
-      path: '/dashboard',
-      name: 'DashBoard',
-      component: Dashboard,
-      meta: { requiresAuth: true }
+    path: '/dashboard',
+    name: 'DashBoard',
+    component: Dashboard,
+    meta: { requiresAuth: true }
 
-    },
-      {
+  },
+  {
 
-      path: '/settings',
-      name: 'settings',
-      component: Settings,
-      meta: { requiresAuth: true }
+    path: '/settings',
+    name: 'settings',
+    component: Settings,
+    meta: { requiresAuth: true }
 
-    },
-    {
+  }
+  ,
+  {
+
+    path: '/trend',
+    name: 'trend',
+    component: Trend,
+    meta: { requiresAuth: true }
+
+  },
+   {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword,
+    meta: {
+      guest: true // 不需要登录即可访问
+    }
+  },
+  {
+    path: '/reset-password',
+    name: 'ResetPassword',
+    component: ResetPassword,
+    meta: {
+      guest: true // 不需要登录即可访问
+    }
+  }
+
+  ,
+  {
     path: '/404',
     name: 'NotFound',
     component: NotFound
@@ -63,11 +92,11 @@ const router = createRouter({
     // 当存在保存的位置时（如后退操作），恢复到该位置
     if (savedPosition) {
       return savedPosition;
-    } 
+    }
     // 对于动态路由跳转，强制滚动到顶部
     else if (to.name === from.name && to.params.id !== from.params.id) {
       return { top: 0 };
-    } 
+    }
     // 其他情况默认滚动到顶部
     else {
       return { top: 0 };

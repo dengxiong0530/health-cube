@@ -1,156 +1,57 @@
 <template>
-  <header class="app-header">
-    <div class="header-content">
-      <!-- Logo区域 -->
-      <div class="logo">
-        <span class="el-icon-s-home"></span>
-        <span class="title">健康管理平台</span>
-      </div>
+  <div class="radio-button-group-demo">
+    <!-- 基础按钮式单选组（默认颜色） -->
+    <el-radio-group v-model="selectedType" class="default-style">
+      <el-radio-button label="primary">主要</el-radio-button>
+      <el-radio-button label="success">成功</el-radio-button>
+      <el-radio-button label="warning">警告</el-radio-button>
+      <el-radio-button label="danger">危险</el-radio-button>
+    </el-radio-group>
 
-      <!-- 桌面端导航 -->
-      <nav class="desktop-nav" v-if="!isMobile">
-        <ul class="nav-list">
-          <li class="nav-item" @click="navigateTo('dashboard')">
-            <span class="el-icon-s-data"></span> 仪表盘
-          </li>
-          <li class="nav-item" @click="navigateTo('profile')">
-            <span class="el-icon-user"></span> 个人资料
-          </li>
-          <li class="nav-item" @click="navigateTo('history')">
-            <span class="el-icon-s-order"></span> 历史记录
-          </li>
-          <li class="nav-item" @click="navigateTo('settings')">
-            <span class="el-icon-setting"></span> 设置
-          </li>
-        </ul>
-      </nav>
-
-      <!-- 移动端导航按钮 -->
-      <div class="mobile-nav" v-else>
-        <el-dropdown @command="navigateTo">
-          <el-button type="text">
-            <i class="el-icon-menu"></i>
-          </el-button>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item command="dashboard">
-                <span class="el-icon-s-data"></span> 仪表盘
-              </el-dropdown-item>
-              <el-dropdown-item command="profile">
-                <span class="el-icon-user"></span> 个人资料
-              </el-dropdown-item>
-              <el-dropdown-item command="history">
-                <span class="el-icon-s-order"></span> 历史记录
-              </el-dropdown-item>
-              <el-dropdown-item command="settings">
-                <span class="el-icon-setting"></span> 设置
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
-    </div>
-  </header>
+    <!-- 自定义颜色的按钮式单选组 -->
+    <el-radio-group v-model="selectedStatus" class="custom-style">
+      <el-radio-button label="online">在线</el-radio-button>
+      <el-radio-button label="offline">离线</el-radio-button>
+      <el-radio-button label="maintenance">维护中</el-radio-button>
+    </el-radio-group>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
 
-const router = useRouter();
-const isMobile = ref(false);
-
-// 判断屏幕尺寸
-const checkScreenSize = () => {
-  isMobile.value = window.innerWidth < 768;
-};
-
-// 导航方法
-const navigateTo = (path) => {
-  router.push({ name: path });
-};
-
-// 监听窗口大小变化
-onMounted(() => {
-  checkScreenSize();
-  window.addEventListener('resize', checkScreenSize);
-});
-
-// 组件卸载时移除监听器
-watch(() => isMobile.value, (newVal) => {
-  // 可以在这里添加切换动画逻辑
-});
-
-// 清理
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', checkScreenSize);
-});
+// 绑定选中值
+const selectedType = ref('primary')
+const selectedStatus = ref('online')
 </script>
 
 <style scoped>
-.app-header {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 60px;
+.radio-button-group-demo {
   display: flex;
-  align-items: center;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.desktop-nav .nav-list {
-  list-style: none;
-  display: flex;
+  flex-direction: column;
   gap: 20px;
-  margin: 0;
-  padding: 0;
+  padding: 20px;
+  margin-top: 150px;
 }
 
-.desktop-nav .nav-item {
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+/* 自定义颜色样式 */
+.custom-style {
+  /* 未选中按钮的样式 */
+  --el-radio-button-bg-color: #f5f7fa;
+  --el-radio-button-text-color: #606266;
+  --el-radio-button-border-color: #dcdfe6;
 }
 
-.desktop-nav .nav-item:hover {
-  background-color: #f5f7fa;
+/* 选中状态的颜色（使用深度选择器穿透 scoped） */
+.custom-style ::v-deep .el-radio-button__inner.is-checked {
+  background-color: #4B5CC4; /* 选中时的背景色 */
+  color: #fff; /* 选中时的文字色 */
+  border-color: #4B5CC4; /* 选中时的边框色 */
 }
 
-.mobile-nav .el-dropdown {
-  height: 100%;
-}
-
-/* 移动端样式 */
-@media (max-width: 767px) {
-  .desktop-nav {
-    display: none;
-  }
-}
-
-/* 桌面端样式 */
-@media (min-width: 768px) {
-  .mobile-nav {
-    display: none;
-  }
+/* 悬停效果 */
+.custom-style ::v-deep .el-radio-button__inner:not(.is-checked):hover {
+  color: #4B5CC4;
+  border-color: #c0c6e0;
 }
 </style>
