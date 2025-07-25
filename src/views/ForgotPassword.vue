@@ -17,7 +17,6 @@
             v-model="form.email" 
             placeholder="Your e-mail address" 
             type="email"
-            prefix-icon="Message"
             class="auth-input"
           ></el-input>
     
@@ -35,7 +34,7 @@
               <el-icon><Loading /></el-icon>
               <span>Sending...</span>
             </template>
-            Reset my Password
+            Reset  Password
           </el-button>
         </el-form-item>
       </el-form>
@@ -43,8 +42,9 @@
       <!-- 消息提示 -->
       <el-alert 
         v-if="message" 
-        :message="message" 
+
         :type="messageType" 
+        :title="message"
         show-icon 
         class="auth-alert"
         :closable="true"
@@ -97,7 +97,7 @@ const handleSendCode = async () => {
     if (error) throw error
     
     messageType.value = 'success'
-    message.value = '验证码已发送，请注意查收邮件（15分钟内有效）'
+    message.value = 'The verification code has been sent. Please check your email.'
     
     // 3秒后跳转到验证码页面
     setTimeout(() => {
@@ -110,7 +110,7 @@ const handleSendCode = async () => {
   } catch (err) {
     messageType.value = 'error'
     message.value = 'The email sending failed. Please ensure that the email address you entered is correct.'
-    console.log(message.value)
+    
   } finally {
     loading.value = false
   }
@@ -160,6 +160,8 @@ const handleSendCode = async () => {
 
 .auth-form {
   margin-bottom: 20px;
+
+
 }
 
 .auth-input {
@@ -177,11 +179,14 @@ const handleSendCode = async () => {
 .auth-btn {
   width: 100%;
   height: 50px;
-  font-size: 16px;
+  font-size: 15px;
   border-radius: 8px;
   background: #4096ff;
   border: none;
   transition: background 0.3s;
+  margin-top: 10px;
+
+
 }
 
 .auth-btn:hover {
