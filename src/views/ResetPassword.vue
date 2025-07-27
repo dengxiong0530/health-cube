@@ -2,8 +2,8 @@
   <div class="reset-container">
     <div class="reset-card">
       <div class="reset-header">
-        <h2 class="reset-title">重置密码</h2>
-        <p class="reset-desc">请输入邮箱收到的验证码，并设置新密码</p>
+        <h2 class="reset-title">Reset password</h2>
+        <p class="reset-desc">Please enter the verification code received in your email and set a new password.</p>
       </div>
 
       <el-form 
@@ -34,7 +34,7 @@
               :disabled="countdown > 0"
               class="resend-btn"
             >
-              {{ countdown > 0 ? `重新发送(${countdown}s)` : '重新发送' }}
+              {{ countdown > 0 ? `Resend(${countdown}s)` : 'Resend' }}
             </el-button>
           </div>
         </el-form-item>
@@ -42,7 +42,7 @@
         <el-form-item prop="password">
           <el-input 
             v-model="form.password" 
-            placeholder="请设置新密码（至少8位）" 
+            placeholder="Please set a new password." 
             type="password"
             show-password
             prefix-icon="Lock"
@@ -53,7 +53,7 @@
         <el-form-item prop="confirmPassword">
           <el-input 
             v-model="form.confirmPassword" 
-            placeholder="请确认新密码" 
+            placeholder="Please confirm the new password." 
             type="password"
             show-password
             prefix-icon="Check"
@@ -66,13 +66,14 @@
             type="primary" 
             @click="handleResetPassword"
             :loading="loading"
+            :disabled="loading"
             class="reset-btn"
           >
             <template #loading>
               <el-icon><Loading /></el-icon>
-              <span>重置中...</span>
+              <span>Resetting...</span>
             </template>
-            确认重置
+            Confirm reset
           </el-button>
         </el-form-item>
       </el-form>
@@ -81,6 +82,7 @@
       <el-alert 
         v-if="message" 
         :message="message" 
+        :title="message"
         :type="messageType" 
         show-icon 
         class="reset-alert"
@@ -89,7 +91,7 @@
       ></el-alert>
 
       <div class="reset-footer">
-        <el-link @click="$router.push('/forgot-password')" class="back-link">返回上一步</el-link>
+        <el-link @click="$router.push('/forgot-password')" class="back-link">Go back to the previous step</el-link>
       </div>
     </div>
   </div>
@@ -125,7 +127,7 @@ const rules = {
     { 
       validator: (rule, value, callback) => {
         if (form.code.join('').length < 6) {
-          callback(new Error('请输入完整的6位验证码'))
+          callback(new Error('Please enter the complete 6 - digit verification code.'))
         } else {
           callback()
         }
@@ -134,15 +136,15 @@ const rules = {
     }
   ],
   password: [
-    { required: true, message: '请设置新密码', trigger: 'blur' },
-    { min: 8, message: '密码长度不能少于8个字符', trigger: 'blur' }
+    { required: true, message: 'Please set a new password.', trigger: 'blur' },
+    { min: 8, message: 'The password length should not be less than 8 characters.', trigger: 'blur' }
   ],
   confirmPassword: [
-    { required: true, message: '请确认密码', trigger: 'blur' },
+    { required: true, message: 'Please confirm the password.', trigger: 'blur' },
     { 
       validator: (rule, value, callback) => {
         if (value !== form.password) {
-          callback(new Error('两次输入的密码不一致'))
+          callback(new Error('The passwords entered twice do not match.'))
         } else {
           callback()
         }
@@ -169,7 +171,7 @@ const handleCodeFocus = (index) => {
 const handleResendCode = async () => {
   try {
     if (!email.value) {
-      message.value = '邮箱信息缺失，请返回上一步'
+      message.value = 'Email information is missing. Please go back to the previous step.'
       messageType.value = 'error'
       return
     }
@@ -182,11 +184,11 @@ const handleResendCode = async () => {
     if (error) throw error
     
     messageType.value = 'success'
-    message.value = '验证码已重新发送'
+    message.value = 'The verification code has been resent.'
     startCountdown() // 开始倒计时
   } catch (err) {
     messageType.value = 'error'
-    message.value = err.message || '发送失败，请重试'
+    message.value = err.message || 'The sending failed. Please try again.'
   }
 }
 
@@ -217,7 +219,7 @@ const handleResetPassword = async () => {
     )
 
     if (verifyError) throw verifyError
-    if (!verifyData.valid) throw new Error('验证码错误或已过期')
+    if (!verifyData.valid) throw new Error('The verification code is incorrect or has expired.')
 
     // 2. 更新密码
     const { error: updateError } = await supabase.functions.invoke(
@@ -228,7 +230,7 @@ const handleResetPassword = async () => {
     if (updateError) throw updateError
 
     messageType.value = 'success'
-    message.value = '密码重置成功，即将跳转到登录页'
+    message.value = 'Password reset was successful. You will be redirected to the login page shortly.'
     
     setTimeout(() => {
       router.push('/login')
@@ -236,11 +238,23 @@ const handleResetPassword = async () => {
     
   } catch (err) {
     messageType.value = 'error'
-    message.value = err.message || '重置失败，请重试'
+    message.value = err.message || 'Reset failed. Please try again.'
   } finally {
     loading.value = false
   }
 }
+
+const handlePaste = (e) => {
+  e.preventDefault();
+  const pastedText = e.clipboardData.getData('text').trim();
+  if (/^\d{6}$/.test(pastedText)) { // 验证是否为6位数字
+    form.code = pastedText.split(''); // 拆分到数组
+    // 自动聚焦到密码框
+    setTimeout(() => {
+      document.querySelector('.reset-input')?.focus();
+    }, 300);
+  }
+};
 
 // 页面加载时自动聚焦第一个验证码输入框
 onMounted(() => {
@@ -249,6 +263,9 @@ onMounted(() => {
     firstInput?.focus()
   }, 300)
   startCountdown() // 初始化倒计时
+
+  const codeContainer = document.querySelector('.code-inputs');
+  codeContainer?.addEventListener('paste', handlePaste);
 })
 </script>
 

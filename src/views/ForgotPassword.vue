@@ -28,6 +28,7 @@
             type="primary" 
             @click="handleSendCode"
             :loading="loading"
+            :disabled="!isEmailValid"
             class="auth-btn"
           >
             <template #loading>
@@ -60,10 +61,10 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
 import { supabase } from '@/utils/supabase'
-import { Message, Loading } from '@element-plus/icons-vue'
+import { Loading } from '@element-plus/icons-vue'
+import { computed, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const formRef = ref(null)
@@ -81,6 +82,14 @@ const rules = {
     { type: 'email', message: 'Please enter the correct email format.', trigger: 'blur' }
   ]
 }
+
+const isEmailValid = computed(() => {
+  const email = form.email.trim();
+  const required = email !== '';
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const validFormat = emailRegex.test(email);
+  return required && validFormat;
+});
 
 const handleSendCode = async () => {
   try {
