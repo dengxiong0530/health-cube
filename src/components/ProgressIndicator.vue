@@ -11,7 +11,7 @@
     <div class="color-bars">
       <div v-for="(seg, idx) in segments" :key="idx" :style="{
         width: `${seg.width}%`,
-        backgroundColor: seg.color,
+        backgroundColor: targetColors[seg.color],
         left: `${seg.left}%`
       }"></div>
     </div>
@@ -27,6 +27,7 @@
 <script setup>
 import { defineProps, computed } from 'vue';
 import tragetSegment from '@/data/targetSegment.json'
+import { targetColors } from '@/constants/colors'
 
 // 定义props并获取
 const props = defineProps({
@@ -52,7 +53,7 @@ const pointerLeft = computed(() => {
 // 计算指针颜色（通过props.value访问）
 const currentColor = computed(() => {
   const seg = segments.value.find(s => s.label === props.value) || segments.value[0];
-  return seg.color;
+  return targetColors[seg.color];
 });
 </script>
 

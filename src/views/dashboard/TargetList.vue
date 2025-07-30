@@ -7,7 +7,8 @@
                 <div class="transaction-item" v-for="(item, idx) in targetListData" :key="idx"
                     @click="clickToDetail(item, $event)">
                     <div class="col-name">{{ item.name }}</div>
-                    <div class="col-priority" :class="item.tagClass">{{ item.tag }}</div>
+                    <div class="col-priority" :style="{ backgroundColor: targetColors[item.tagClass] }">{{ item.tagName
+                        }}</div>
                     <div class="col-budget">{{ item.tagValue }}</div>
                     <el-icon>
                         <ArrowRight />
@@ -26,7 +27,7 @@ import { useUserStore } from '@/stores/userStore'
 import { HealthCalculator } from '@/utils/HealthCalculator';
 import { useNavigationStore } from '@/stores/navigationStore';
 import { useUserTargetStore } from '@/stores/userTargetStore'
-
+import { targetColors } from '@/constants/colors'
 
 const userDataStore = useUserStore();
 // const weight = computed(() => userDataStore.userInfoStore?.weight || 0)
@@ -60,22 +61,35 @@ const targetListData = computed(() => {
         userInfoStore.value.age,
         userInfoStore.value.gender,
         userInfoStore.value.waist,
-        userInfoStore.value.hip
-    
+        userInfoStore.value.hip,
+        userInfoStore.value.neck
+
     )
     const bmiResult = healthCalculator.getBmi();
     const absiResult = healthCalculator.getABSI();
-    const whrResult =    healthCalculator.getWaistToHip();
+    const whrResult = healthCalculator.getWaistToHip();
 
-    updateTarget({ name: 'Weight', tag: 'Underweight', tagClass: 'low', tagValue: userInfoStore.value.weight });
+    const idealWeightResult = healthCalculator.getIdealWeight();
+    // const heartRateResult = healthCalculator.getHeartRate();
+
+
+
+    const navyBodyFatResult = healthCalculator.getNavyBodyFat();
+
+
+    // updateTarget({ name: 'Weight', tag: 'Underweight', tagClass: 'low', tagValue: userInfoStore.value.weight });
     updateTarget(bmiResult);
     updateTarget(absiResult);
     updateTarget(whrResult);
+    updateTarget(idealWeightResult);
+    // updateTarget(heartRateResult);
+    updateTarget(navyBodyFatResult);
 
 
-    clickToDetail(bmiResult); //更新数据后刷新detail页面
-    return [{ name: 'Weight', tag: 'Underweight', tagClass: 'low', tagValue: `${userInfoStore.value.weight} kg` },
-        bmiResult, absiResult,whrResult
+
+    // clickToDetail(bmiResult); //更新数据后刷新detail页面
+    return [ 
+        bmiResult, absiResult, whrResult,navyBodyFatResult,idealWeightResult,
     ]
 
 });
@@ -99,7 +113,7 @@ const targetListData = computed(() => {
 <style scoped>
 .target-list-div {
     /* margin-top: 10px; */
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .target-list-card-title {
@@ -136,6 +150,7 @@ const targetListData = computed(() => {
     margin-right: 20px;
 }
 
+/* 
 .lowLess {
     background-color: #64abf3;
 }
@@ -154,5 +169,5 @@ const targetListData = computed(() => {
 
 .obese {
     background-color: #FF0000;
-}
+} */
 </style>

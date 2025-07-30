@@ -23,7 +23,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<!-- <div class="col-md-4">
 								<div class="social-media">
 		    						<ul>
 		    							<li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
@@ -32,13 +32,13 @@
 		    							<li><a href="javascript:void(0)"><i class="fa fa-youtube"></i></a></li>
 		    						</ul>
 		    					</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="footer-bottom">
 						<div class="row">
 							<div class="col-12">
-								<p class="mb-0">© 2025 All Rights Reserved. <a target="_blank" href="https://www.mobanwang.com/" title="网站模板">网站模板</a></p>
+								<p class="mb-0">© 2025 All Rights Reserved.</p>
 							</div>
 						</div>
 					</div>

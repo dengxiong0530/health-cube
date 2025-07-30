@@ -41,20 +41,23 @@
 
     <el-form v-if="activeTab === 'profile'" :model="userInfo" ref="editFormRef" label-width="100px"
       class="profile-form">
+      <div  class="missing-info-tip">
+        <el-alert title="Waist circumference and hip circumference are mainly used to calculate the waist - to - hip ratio, which is also an important indicator of abdominal fat distribution." type="info" show-icon effect="light" />
+      </div>
       <el-row :gutter="24" class="class-profile-row">
-        <el-col :span="10" > <el-form-item label="Height(cm)" prop="height">
-            <el-input-number v-model.number="userInfo.height" placeholder="Please enter your height(cm)." :min="80"
+        <el-col :span="10"> <el-form-item label="Height(cm)" prop="height">
+            <el-input-number v-model.number="userInfo.height" placeholder="Please enter your height(cm)." :min="50"
               :max="300" :step="0.2"></el-input-number>
           </el-form-item></el-col>
         <el-col :span="10">
 
           <el-form-item label="Age" prop="age">
-            <el-input-number v-model.number="userInfo.age" placeholder="Please enter your age." :min="18" :max="120">
+            <el-input-number v-model.number="userInfo.age" placeholder="Please enter your age." :min="15" :max="120">
             </el-input-number>
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row :gutter="24"  class="class-profile-row">
+      <el-row :gutter="24" class="class-profile-row">
         <el-col :span="10"> <el-form-item label="Weight(kg)" prop="weight">
             <el-input-number v-model.number="userInfo.weight" placeholder="Please enter your weight (kg)." :min="10"
               :max="500" :step="0.2"></el-input-number>
@@ -64,7 +67,7 @@
               :max="500" :step="0.2"></el-input-number>
           </el-form-item></el-col>
       </el-row>
-      <el-row :gutter="24"  class="class-profile-row">
+      <el-row :gutter="24" class="class-profile-row">
         <el-col :span="10"> <el-form-item label="Hip(cm)" prop="hip">
             <el-input-number v-model.number="userInfo.hip" placeholder="Please enter your Hip (cm)." :min="10"
               :max="500" :step="0.2"></el-input-number>
@@ -198,7 +201,7 @@ const fetchUserInfo = async () => {
   // console.log(userInfo)
 }
 
-const activeTab = ref('overview');
+const activeTab = ref('profile');
 const tabs = [
   { name: 'overview', label: 'Overview' },
   { name: 'profile', label: 'Profile' },
@@ -310,7 +313,7 @@ const submitForm = async () => {
 }
 
 .class-profile-row {
- margin-bottom: 10px;
- margin-top: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 </style>

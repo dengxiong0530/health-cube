@@ -2,27 +2,27 @@
     {
         "targetName": "BMI",
         "segments": [
-            {
+            {   
                 "label": "Underweight",
-                "color": "#1E90FF",
+                "color": "low",
                 "width": 25,
                 "left": 0
             },
             {
                 "label": "Normal",
-                "color": "#32CD32",
+                "color": "medium",
                 "width": 25,
                 "left": 25
             },
             {
                 "label": "Overweight",
-                "color": "#FFA500",
+                "color": "high",
                 "width": 25,
                 "left": 50
             },
             {
                 "label": "Obesity",
-                "color": "#FF0000",
+                "color": "obese",
                 "width": 25,
                 "left": 75
             }
@@ -33,25 +33,25 @@
         "segments": [
             {
                 "label": "Underweight",
-                "color": "#1E90FF",
+                "color": "low",
                 "width": 25,
                 "left": 0
             },
             {
                 "label": "Normal",
-                "color": "#32CD32",
+                "color": "medium",
                 "width": 25,
                 "left": 25
             },
             {
                 "label": "Overweight",
-                "color": "#FFA500",
+                "color": "high",
                 "width": 25,
                 "left": 50
             },
             {
                 "label": "Obesity",
-                "color": "#FF0000",
+                "color": "obese",
                 "width": 25,
                 "left": 75
             }
@@ -62,31 +62,31 @@
         "segments": [
              {
                 "label": "Very Low",
-                "color": "#64abf3",
+                "color": "lowLess",
                 "width": 20,
                 "left": 0
             },
             {
                 "label": "Low Risk",
-                "color": "#1E90FF",
+                "color": "low",
                 "width": 20,
                 "left": 20
             },
             {
                 "label": "Average",
-                "color": "#32CD32",
+                "color": "medium",
                 "width": 20,
                 "left": 40
             },
             {
                 "label": "High Risk",
-                "color": "#FFA500",
+                "color": "high",
                 "width": 20,
                 "left": 60
             },
             {
                 "label": "Very High",
-                "color": "#FF0000",
+                "color": "obese",
                 "width": 20,
                 "left": 80
             }
@@ -98,21 +98,51 @@
            
             {
                 "label": "Normal",
-                "color": "#32CD32",
+                "color": "medium",
                 "width": 33,
                 "left": 0
             },
             {
                 "label": "Moderate Risk",
-                "color": "#FFA500",
+                "color": "high",
                 "width": 33,
                 "left": 30
             },
             {
                 "label": "High Risk",
-                "color": "#FF0000",
+                "color": "obese",
                 "width": 33,
                 "left": 60
+            }
+        ]
+    },
+    {
+        "targetName": "BodyFat",
+        "segments": [
+             
+            {
+                "label": "Low",
+                "color": "low",
+                "width": 25,
+                "left": 0
+            },
+            {
+                "label": "Normal",
+                "color": "medium",
+                "width": 25,
+                "left": 25
+            },
+            {
+                "label": "High",
+                "color": "high",
+                "width": 25,
+                "left": 50
+            },
+            {
+                "label": "Very High",
+                "color": "obese",
+                "width": 25,
+                "left": 75
             }
         ]
     }

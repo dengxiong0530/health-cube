@@ -4,11 +4,13 @@
         <el-card class="target-card-right" shadow="hover">
             <h3>Target Detail</h3>
             <el-row :gutter="2">
-                <el-button color="#626aAf" size="small"
-                    @click="handleClick(getTargetStore('Weight'))">Weight</el-button>
-                <el-button color="#626aAf" size="small" @click="handleClick(getTargetStore('BMI'))">BMI</el-button>
-                <el-button color="#626aAf" size="small" @click="handleClick(getTargetStore('ABSI'))">ABSI</el-button>
-                <el-button color="#626aAf" size="small" @click="handleClick(getTargetStore('WHR'))">WHR</el-button>
+
+                <el-button color="#626aAf" size="small" style="margin-bottom: 10px;" @click="handleClick(getTargetStore('BMI'))">BMI</el-button>
+                <el-button color="#626aAf" size="small"  style="margin-bottom: 10px;" @click="handleClick(getTargetStore('ABSI'))">ABSI</el-button>
+                <el-button color="#626aAf" size="small"  style="margin-bottom: 10px;" @click="handleClick(getTargetStore('WHR'))">WHR</el-button>
+                <el-button color="#626aAf" size="small"  style="margin-bottom: 10px;" @click="handleClick(getTargetStore('BodyFat'))">BodyFat</el-button>
+                <el-button color="#626aAf" size="small"  style="margin-bottom: 10px;" @click="handleClick(getTargetStore('IdealWeight'))">IdealWeight</el-button>
+                <!-- <el-button color="#626aAf" size="small"  style="margin-bottom: 10px;" @click="handleClick(getTargetStore('TargetHeartRate'))">TargetHeartRate</el-button> -->
 
             </el-row>
             <el-row><el-card class="target-card-detail" shadow="hover">
@@ -17,13 +19,14 @@
 
                     <!-- <ProgressIndicator value="Normal" name="BMI" /> -->
 
-                    <ProgressIndicator :value="tag" :name="targetName" />
+                    <!-- <ProgressIndicator :value="tag" :name="targetName" /> -->
+                    <ProgressIndicator v-if="tag" :value="tag" :name="targetName" />
 
                     <el-text class="target-dt-text" type="info" size="default">
                         {{ targetJson.desc }}
                     </el-text>
                 </el-card> </el-row>
-            <el-row>
+            <el-row v-if="tag">
                 <el-card class="target-card-detail class-span-call" shadow="hover">
                     <h3>index analysis</h3>
                     <el-text class="target-dt-text" type="info" size="default">
@@ -51,6 +54,7 @@
 </template>
 
 <script setup>
+
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import tragetData from '@/data/target.json'
 import { useNavigationStore } from '@/stores/navigationStore';
@@ -59,8 +63,8 @@ import ProgressIndicator from '@/components/ProgressIndicator.vue';
 const navigationStore = useNavigationStore();
 const userTargetStore = useUserTargetStore();
 
-const v_call = ref("Your Weight:");
-const targetName = ref('Weight');
+const v_call = ref('Your BMI:');
+const targetName = ref('BMI');
 const targetJson = ref(getTargetObject(targetName.value));
 
 const targetStore = ref(getTargetStore('Weight'));
@@ -86,9 +90,9 @@ const handleClick = (item) => {
     // console.log(tag.value,targetName.value)
 
     switch (item.name) {
-        case 'Weight':
-            v_call.value = "Your Weight:";
-            break;
+        // case 'Weight':
+        //     v_call.value = "Your Weight:";
+        //     break;
         case 'BMI':
             v_call.value = "Your BMI:";
             break;
@@ -98,8 +102,18 @@ const handleClick = (item) => {
         case 'WHR':
             v_call.value = "Your Waist-to-Hip Ratio:";
             break;
+        case 'IdealWeight':
+            v_call.value = "Your Ideal Weight:";
+            break;
+
+        case 'TargetHeartRate':
+            v_call.value = "Your Target Heart Rate:";
+            break;
+        case 'BodyFat':
+            v_call.value = "Your Navy Body Fat:";
+            break;
         default:
-            v_call.value = "Your Weight:";
+            v_call.value = "Your BMI:";
 
             break;
     }
@@ -159,6 +173,7 @@ onMounted(() => {
 
 
 
+
 .target-card-right .el-card__body>div {
     margin-bottom: 25px;
     /* 元素之间的垂直间距 */
@@ -168,16 +183,6 @@ onMounted(() => {
     width: 100%;
 }
 
-.target-card-right .el-card__body>div:last-child {
-    /* margin-bottom: 0px; */
-    /* 最后一个元素不添加底部间距 */
-}
-
-.class-span-call {
-    /* display: block; */
-    /* 让span独占一行 */
-    /* text-align: left; */
-}
 
 .target-dt-text {
     text-align: left;

@@ -42,16 +42,5 @@ const selectedStatus = ref('online')
   --el-radio-button-border-color: #dcdfe6;
 }
 
-/* 选中状态的颜色（使用深度选择器穿透 scoped） */
-.custom-style ::v-deep .el-radio-button__inner.is-checked {
-  background-color: #4B5CC4; /* 选中时的背景色 */
-  color: #fff; /* 选中时的文字色 */
-  border-color: #4B5CC4; /* 选中时的边框色 */
-}
 
-/* 悬停效果 */
-.custom-style ::v-deep .el-radio-button__inner:not(.is-checked):hover {
-  color: #4B5CC4;
-  border-color: #c0c6e0;
-}
 </style>

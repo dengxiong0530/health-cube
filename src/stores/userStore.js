@@ -30,13 +30,11 @@ export const useUserStore = defineStore('user', () => {
             if (error) {
                 if (error.code === 'PGRST116') {
                     // 记录不存在
-
+                    return -1
                 } else {
                     throw error
                 }
             }
-
-            if (error) throw error
             userInfoStore.value = data
             return data
         } catch (error) {
@@ -134,4 +132,4 @@ export const useUserStore = defineStore('user', () => {
         useUserInfoStore
 
     }
-})  
+})

@@ -23,24 +23,24 @@
     },
     {
         "targetName": "Weight",
-        "desc": "体重是什么xxxxxx巴拉巴拉",
+        "desc": " ",
         "indexAnalysis": {
-            "Underweight": "您的体重太轻了，多吃点",
-            "Normal": "标准身材啊。。。",
-            "Overweight": "体重偏高哦",
-            "Obesity": "肥胖了兄弟啊"
+            "Underweight": " ",
+            "Normal": " ",
+            "Overweight": " ",
+            "Obesity": " "
         },
         "exerciseSuggestions": {
-            "Underweight": "多吃点拉，别减肥",
-            "Normal": "保持",
-            "Overweight": "要减肥了",
-            "Obesity": "必须减肥"
+            "Underweight": " ",
+            "Normal": " ",
+            "Overweight": " ",
+            "Obesity": " "
         },
         "DietaryAdvice": {
-            "Underweight": "多吃点拉",
-            "Normal": "保持",
-            "Overweight": "要减肥了，少吃点",
-            "Obesity": "必须减肥，控糖了"
+            "Underweight": " ",
+            "Normal": " ",
+            "Overweight": " ",
+            "Obesity": " "
         }
     },
     {
@@ -69,25 +69,25 @@
         "targetName": "ABSI",
         "desc": "ABSI (A Body Shape Index) is a metric designed to assess abdominal fat distribution, addressing the limitations of traditional BMI (Body Mass Index). While BMI considers only height and weight, it doesn’t account for how fat is distributed throughout the body, particularly around the abdomen. Excess abdominal fat is closely linked to various health risks, including cardiovascular diseases and diabetes. ABSI provides a more comprehensive perspective for evaluating health risks.",
         "indexAnalysis": {
-            "Very Low": "Your body shape index is significantly below average, with low health risks.",
-            "Low Risk": "Your body shape index is slightly below average, with minimal health risks.",
-            "Average": "Your body shape index is close to average, with typical health risks.",
-            "High Risk": "Your body shape index is above average, suggesting increased health risks.",
-            "Very High": "Your body shape index is significantly above average, indicating high risks."
+            "Very Low": "Your body shape index is significantly below average, with low health risks.Your body type and metabolic state are relatively healthy. It is recommended to focus on maintaining the current situation and preventing risks.",
+            "Low Risk": "Your body shape index is slightly below average, with minimal health risks.It is necessary to avoid the accumulation of bad habits to prevent the development towards a high - risk state.",
+            "Average": "Your body shape index is close to average, with typical health risks.You need to take the initiative to adjust your lifestyle to reduce abdominal fat and metabolic burden.",
+            "High Risk": "Your body shape index is above average, suggesting increased health risks.There is a certain risk of metabolic abnormalities (such as insulin resistance, dyslipidemia), so intensive intervention is needed to reduce abdominal and visceral fat.",
+            "Very High": "Your body shape index is significantly above average, indicating high risks.You belong to the high - risk group for metabolic diseases (such as a significantly increased risk of diabetes and cardiovascular diseases). It is recommended to develop a personalized plan under the guidance of a doctor or a nutritionist, combined with lifestyle adjustments."
         },
         "exerciseSuggestions": {
-            "Very Low Risk": "",
-            "Low Risk": "",
-            "Average Risk": "",
-            "High Risk": "",
-            "Very High Risk": ""
+            "Very Low": "Maintain 150 - 300 minutes of moderate - intensity aerobic exercise (such as brisk walking, jogging, swimming) per week, or 75 - 150 minutes of high - intensity aerobic exercise (such as skipping rope, sprinting).Increase daily activity levels, such as taking the stairs, commuting by bike, etc., and keep the daily step count between 6000 - 10000 steps.",
+            "Low Risk": "Engage in at least 150 minutes of moderate - intensity aerobic exercise per week. It can be split into 30 minutes per day for 5 days (such as brisk walking, cycling). Avoid not exercising for 3 consecutive days.Reduce sitting time. Get up and move around for 5 minutes every hour (such as stretching, taking a walk).",
+            "Average": "Do 200 - 300 minutes of moderate - intensity aerobic exercise per week. You can add interval training (for example, jog for 1 minute + walk briskly for 2 minutes, repeat 10 sets) to improve the fat - burning efficiency.Carry out resistance training 3 times a week, covering the whole body muscle groups (chest, back, legs, core), 30 - 45 minutes each time (such as squats, push - ups, rows).Do 10 - minute targeted abdominal training every day (such as Russian twists, hip bridges) to improve the abdominal lines.",
+            "High Risk": "Do at least 250 minutes of aerobic exercise per week, mainly of moderate - low intensity (such as brisk walking, swimming, using an elliptical machine) to avoid over - burdening joints from strenuous exercise.Conduct resistance training 3 - 4 times a week, starting with light weights and multiple sets (for example, dumbbell curls 15 times × 3 sets), gradually increasing muscle mass to improve metabolism.Add 10 - 15 minutes of abdominal breathing + core tightening training every day (for example, lie flat, inhale to expand the abdomen, exhale to contract the abdomen, repeat 20 times) to enhance abdominal control.",
+            "Very High": "In the initial stage, mainly do low - intensity aerobic exercise, 20 - 30 minutes each time, 5 - 6 times a week, and gradually increase to moderate intensity (control the heart rate at 60% - 70% of the maximum heart rate, and the maximum heart rate = 220 - age).Start resistance training with bodyweight training (such as wall sits, seated leg raises), 2 - 3 times a week, 20 minutes each time, to avoid excessive joint pressure.Do 5 - 10 minutes of full - body stretching every day to improve blood circulation and reduce the risk of sports injuries."
         },
         "DietaryAdvice": {
-            "Very Low Risk": "",
-            "Low Risk": "",
-            "Average Risk": "",
-            "High Risk": "",
-            "Very High Risk": ""
+            "Very Low": "Maintain a balanced diet. Consume an adequate amount of vegetables (300 - 500g), fruits (200 - 350g), whole grains (such as oats, brown rice, accounting for more than one - third of staple foods) and high - quality protein (fish, poultry, eggs, beans) every day.",
+            "Low Risk": "Reduce the proportion of refined carbohydrates (white rice, white bread), replace part of the staple food with miscellaneous beans and tubers, and control the daily intake of staple food.ive priority to unsaturated fats (such as olive oil, nuts, deep - sea fish), reduce the intake of animal fats (such as lard, butter), and keep the daily cooking oil intake within 25g.Increase the intake of dietary fiber (such as eating celery and apples with the skin). Have at least 25g of dietary fiber per day to help maintain satiety and intestinal health.",
+            "Average": "Strictly control foods high in sugar, salt and fat (such as hot pot, barbecue, sweet drinks), no more than 1 - 2 times a week, and halve the intake each time.Increase the proportion of protein (15% - 20% of daily calories), for example, add 1 egg to breakfast and 100g of chicken breast to lunch, to help maintain muscles and reduce hunger.For dinner, mainly have vegetables and high - quality protein (such as vegetable salad + steamed fish), control the staple food intake to 50 - 100g, and do not eat 3 hours before going to bed.",
+            "High Risk": "Adopt a low - GI (glycemic index) diet, avoid refined sugar and high - GI foods (white congee, cakes, watermelons), and choose foods with a GI < 55 (such as oats, quinoa, strawberries).Limit the total daily calorie intake (reduce 300 - 500 calories compared to daily needs), but not below the basal metabolic rate   to avoid excessive dieting.Keep the daily salt intake below 5g, reduce processed foods (such as sausages, canned foods), and use spices (ginger, garlic, black pepper) to replace some of the salt when cooking.",
+            "Very High": "Strictly follow the principle of controlling sugar, oil and total amount. Give priority to natural foods (such as fresh vegetables, lean meat, unsweetened yogurt), and avoid any processed snacks and sweet drinks.Adopt the eating small meals frequently mode (5 - 6 meals a day, 3 main meals + 2 - 3 snacks). For snacks, you can choose a small handful of nuts (10g) or one hard - boiled egg to avoid blood sugar fluctuations caused by an empty stomach.Increase the intake of omega - 3 fatty acids (for example, eat deep - sea fish 2 - 3 times a week, such as salmon, sardines) to help improve blood lipid and inflammatory response."
         }
     },
     {
@@ -107,6 +107,38 @@
             "Normal": "Your waist - to - hip ratio is normal. Please keep it up.",
             "Moderate Risk": "Incorporate more fiber-rich foods like whole grains, vegetables, and fruits, and replace unhealthy fats with unsaturated fats, such as olive oil or omega-3 fatty acids from fish.",
             "High Risk": "Incorporate more fiber-rich foods like whole grains, vegetables, and fruits, and replace unhealthy fats with unsaturated fats, such as olive oil or omega-3 fatty acids from fish."
+        }
+    },{
+        "targetName": "IdealWeight",
+        "desc": "Ideal weight refers to the most suitable body weight for a person under the premise of health. It is an important indicator to measure whether a person is in a healthy state. Being underweight or overweight may have an adverse impact on health.Generally speaking, if the actual weight is within ±10% of the ideal weight, it is considered normal. If it exceeds the ideal weight by 10% - 20%, it is overweight; if it exceeds by more than 20%, it is obese. If it is 10% - 20% lower than the ideal weight, it is regarded as thin; if it is lower by more than 20%, it is severely thin."
+
+    },{
+        "targetName": "TargetHeartRate",
+        "desc": "Target heart rate refers to a heart rate range set during exercise of a certain intensity to achieve optimal training effects. Staying within this heart rate range allows you to enhance your workout effectiveness without placing excessive strain on your heart."
+
+    },{
+        "targetName": "BodyFat",
+        "desc": "The Navy Body Fat Percentage is a method used to estimate body fat by measuring specific body circumferences. Compared to other body fat measurement techniques like skinfold calipers or complex body composition analyzers, the Navy Body Fat Calculator is much simpler. It requires only the measurement of waist, neck, and hip circumference (for women) along with height to provide an estimated body fat percentage using a specific formula.This method was initially developed by the U.S. Navy to assess the health and fitness levels of service members. Because it's easy to use and requires minimal equipment, the Navy Body Fat Calculator has become one of the most widely used methods for estimating body fat. It’s particularly helpful for those who want to quickly assess their body fat without needing complex equipment.",
+        "indexAnalysis": {
+
+            "Low": "Your Navy Body Fat percentage is below the healthy lower limit. It may be accompanied by overly distinct muscle lines, lack of energy, and poor cold tolerance.",
+            "Normal": "Your Navy Body Fat percentage is within the normal range and your physical fitness can meet the needs of daily training. However, if you don't pay attention to your diet and exercise, your body fat may gradually exceed the standard.",
+            "High": "Your body fat is on the high side. You may experience a decline in physical fitness, such as being unable to complete standard weighted training or failing the endurance test. Moreover, you may have early - stage health problems like fatty liver and high blood lipid.",
+            "Very High": "Your body fat is excessively high. You may have obesity - related diseases (such as hypertension, diabetes). Your physical fitness is severely insufficient, and you're prone to fatigue or injury during exercise. Intervention under the guidance of medical staff and fitness coaches is needed."
+        },
+        "exerciseSuggestions": {
+        
+            "Low": "Reduce high - intensity aerobic training: Limit the number of aerobic exercises to 1 - 2 times a week, mainly with low - intensity ones (such as brisk walking, jogging), 20 - 30 minutes each time, to avoid excessive calorie consumption.Ensure sufficient rest: Sleep 7 - 9 hours a day. Muscles repair and grow during rest. Avoid over - training which may exacerbate energy consumption.",
+            "Normal": "Maintain regular exercise. Do strength training 3 - 4 times a week (targeting the whole - body muscle groups, such as squats, deadlifts, pull - ups), 40 - 60 minutes each time.Do aerobic training 2 - 3 times a week (running, swimming, using a rowing machine), 30 - 45 minutes each time, at a moderate intensity (heart rate at 60% - 70% of the maximum heart rate).Include 1 - 2 flexibility training sessions to prevent sports injuries.",
+            "High": "Focus on moderate - low intensity aerobic training, 5 times a week, 45 - 60 minutes each time (such as brisk walking, swimming, using an elliptical machine) to avoid joint injuries.Do light - weight strength training 2 - 3 times a week (such as dumbbell bench press, bodyweight squats), 12 - 15 repetitions per set, to increase muscle mass and metabolism.Accumulate 8000 - 10000 steps of walking daily, and gradually increase the exercise duration and intensity (for example, increase the exercise volume by 5% every week).",
+            "Very High": "In the initial stage, mainly do extremely low - intensity exercises (such as walking, water walking), 3 - 4 times a week, 20 - 30 minutes each time to avoid excessive joint pressure.Gradually transition to moderate - low intensity aerobic exercises (such as slow cycling), increasing the duration by 5 - 10 minutes per week until it reaches 45 minutes each time.For strength training, focus on bodyweight movements (such as wall sits, seated leg raises), 8 - 10 repetitions per set, with an emphasis on protecting the knees and lower back. Warm - up and stretch thoroughly before and after exercise to avoid injuries. It is recommended to conduct a physical function assessment (such as heart rate and blood pressure monitoring) once a week."
+        },
+        "DietaryAdvice": {
+          
+            "Low": "Moderately increase calorie intake: Increase 300 - 500 calories per day, mainly from high - quality carbohydrates and healthy fats.Increase the proportion of carbohydrates: Choose whole grains. Daily intake can be increased to 5 - 7g/kg of body weight. Supplement promptly after exercise to promote glycogen storage.Increase the intake of healthy fats: Raise the daily fat intake to 1 - 1.2g/kg of body weight. Give priority to avocados, nuts, olive oil, and deep - sea fish. Avoid fried foods.Ensure the basic protein intake: Maintain 1.2 - 1.4g/kg of body weight and choose easily - digestible sources.Eat small meals frequently: Avoid overeating at one time which may cause gastrointestinal discomfort. You can add a serving of nuts, fruits, or energy bars between meals.",
+            "Normal": "Maintain a balanced diet with a reasonable ratio of protein (1.2 - 1.6g/kg of body weight), carbohydrates (4 - 6g/kg of body weight), and healthy fats (0.8 - 1g/kg of body weight).Consume more whole grains, lean meats (chicken breast, fish, shrimp), eggs, low - fat dairy products, and fresh fruits and vegetables. Control processed foods and high - sugar snacks.Ensure sufficient water intake (2 - 3L per day) and avoid excessive alcohol consumption.",
+            "High": "Strictly control calorie intake (reduce 500 - 800 calories per day), and adopt a low - GI diet (choose low - glycemic - index foods like brown rice, quinoa, and beans).Greatly reduce foods high in sugar, oil, and salt (such as hot pot, barbecue, pickled products), and avoid sugary drinks.Have a daily protein intake of 1.6 - 2.0g/kg of body weight (such as protein powder, chicken breast), and control carbohydrate intake at 3 - 4g/kg of body weight, preferably consumed before and after exercise.",
+            "Very High": "Develop a personalized diet plan under the guidance of a nutritionist. Strictly control the total calories (reduce 800 - 1000 calories per day), but ensure sufficient basic nutrition (protein, vitamins, minerals).Almost eliminate refined carbohydrates and added sugars. Replace staple foods with whole grains and legumes, and keep the daily carbohydrate intake no more than 2 - 3g/kg of body weight.Increase the intake of dietary fiber (such as konjac, leafy greens) and water to avoid overeating caused by hunger.Eat small and frequent meals (5 - 6 meals a day, with a 3 - hour interval between each meal) to avoid long periods of fasting."
         }
     }
 ]

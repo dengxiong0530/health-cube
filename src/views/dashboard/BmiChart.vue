@@ -35,7 +35,8 @@ const chartOptions = ref({
             startAngle: 180,
             endAngle: 0,
             center: ['50%', '75%'],
-            radius: '95%',
+            
+            radius: '100%',
             min: 0,
             max: 50,
             splitNumber: 5,
@@ -52,8 +53,8 @@ const chartOptions = ref({
             },
             pointer: {
                 icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
-                length: '12%',
-                width: 18,
+                length: '10%',
+                width: 12,
                 offsetCenter: [0, '-60%'],
                 itemStyle: {
                     color: 'auto'
@@ -94,12 +95,12 @@ const chartOptions = ref({
                 }
             },
             title: {
-                offsetCenter: [0, '-10%'],
+                offsetCenter: [0, '-0%'],
                 fontSize: 20
             },
             detail: {
-                fontSize: 30,
-                offsetCenter: [0, '-35%'],
+                fontSize: 25,
+                offsetCenter: [0, '-25%'],
                 valueAnimation: true,
                 formatter: function (value) {
                     return value;
