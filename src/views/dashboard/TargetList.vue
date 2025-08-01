@@ -8,7 +8,7 @@
                     @click="clickToDetail(item, $event)">
                     <div class="col-name">{{ item.name }}</div>
                     <div class="col-priority" :style="{ backgroundColor: targetColors[item.tagClass] }">{{ item.tagName
-                        }}</div>
+                    }}</div>
                     <div class="col-budget">{{ item.tagValue }}</div>
                     <el-icon>
                         <ArrowRight />
@@ -47,7 +47,7 @@ const navigationStore = useNavigationStore();
 const clickToDetail = (item, event) => {
     // console.log(item, event);
     //  console.log(item,weight);
-    navigationStore.navigateToB(item);
+    navigationStore.navigateToB(item, false);
 
 }
 
@@ -88,8 +88,9 @@ const targetListData = computed(() => {
 
 
     // clickToDetail(bmiResult); //更新数据后刷新detail页面
-    return [ 
-        bmiResult, absiResult, whrResult,navyBodyFatResult,idealWeightResult,
+    navigationStore.navigateToB(bmiResult, true);
+    return [
+        bmiResult, absiResult, whrResult, navyBodyFatResult, idealWeightResult,
     ]
 
 });

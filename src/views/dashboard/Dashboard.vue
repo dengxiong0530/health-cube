@@ -1,59 +1,67 @@
 <template>
-    <div id='dashbord' class="center-sm">
-        <el-row class='one-row' :gutter="55">
-            <el-col class="one-row-col" :xs="20" :sm="20" :md="8" :lg="8" :xl="8">
-                <BmiChart />
-            </el-col>
-            <el-col class="one-row-col" :xs="20" :sm="20" :md="16" :lg="16" :xl="16">
-                <PensonalCard />
-            </el-col>
-            <!-- <el-col :span="8" class="one-row-col"><el-card style="max-width: 100%"></el-card> </el-col> -->
-        </el-row>
+  
+        <div id='dashbord' class="center-sm">
 
-        <el-row class='two-row' :gutter="55">
-            <el-col class="one-row-col" :xs="20" :sm="20" :md="8" :lg="8" :xl="8">
+            <el-row class='one-row' :gutter="55">
+                <el-col class="one-row-col" :xs="20" :sm="20" :md="8" :lg="8" :xl="8">
+                    <BmiChart />
+                </el-col>
+                <el-col class="one-row-col" :xs="20" :sm="20" :md="16" :lg="16" :xl="16">
+                    <PensonalCard />
+                </el-col>
+                <!-- <el-col :span="8" class="one-row-col"><el-card style="max-width: 100%"></el-card> </el-col> -->
+            </el-row>
+
+            <el-row class='two-row' :gutter="55">
+                <el-col class="one-row-col" :xs="20" :sm="20" :md="8" :lg="8" :xl="8">
 
 
-                <TargetList />
-                <!-- <PersonalDetails /> -->
+                    <TargetList />
+                    <!-- <PersonalDetails /> -->
 
-                <el-card shadow="hover" class="custom-warning-card">
-                    <h4><el-icon class="warning-icon">
-                            <WarningFilled />
-                        </el-icon> Disclaimer</h4>
-                    <!-- <span class="disclaimer-text">
+                    <el-card shadow="hover" class="custom-warning-card">
+                        <h4><el-icon class="warning-icon">
+                                <WarningFilled />
+                            </el-icon> Disclaimer</h4>
+                        <!-- <span class="disclaimer-text">
                     The health indicators provided by this calculator are for informational purposes only and do not substitute for professional medical advice. Please consult a healthcare professional before making any health interventions. Users assume all risks associated with the information obtained from this tool.
                 </span>
              -->
-                
+
 
                         <div class="disclaimer-content">
-                           <span class="disclaimer-text">
+                            <span class="disclaimer-text">
                                 Health metrics from this calculator are for <strong>informational use only</strong>
                                 and <strong>not a substitute for professional medical advice</strong>.
                                 Consult a licensed healthcare provider before making health decisions.
                                 We assume <strong>no liability</strong> for outcomes based on these results.
                             </span>
                         </div>
-                  
-
-                </el-card>
 
 
-
-            </el-col>
-            <el-col class="one-row-col" :xs="20" :sm="20" :md="16" :lg="16" :xl="16">
-
-                <TargetDetails />
+                    </el-card>
 
 
 
-            </el-col>
-        </el-row>
-    </div>
+                </el-col>
+                <el-col class="one-row-col" :xs="20" :sm="20" :md="16" :lg="16" :xl="16">
+
+                    <TargetDetails />
+
+
+
+                </el-col>
+            </el-row>
+
+        </div>
+ 
 </template>
 
 <style scoped>
+
+
+
+
 .disclaimer-alert {
     margin: 1rem 0;
     font-family: 'Helvetica Neue', Arial, sans-serif;

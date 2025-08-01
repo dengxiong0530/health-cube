@@ -248,6 +248,10 @@ onMounted(() => {
     chartInstance?.resize();
   });
 
+      if (weightData.value.days >= 5) {
+      hasMissingInfo.value = true
+    }
+
 });
 
 // 组件卸载时销毁图表（避免内存泄漏）

@@ -4,7 +4,7 @@
 			<div class="row m-0">
 				<div class="col-lg-3 col-md-4 col-8 p-0">
 					<div class="navbar-header">
-						<a class="navbar-brand page-scroll" href="index.html">
+						<a class="navbar-brand page-scroll" href="/"  >
 							<img alt="hexan" src="@/assets/images/logo.png">
 						</a>
 					</div>

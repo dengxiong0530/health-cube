@@ -1,9 +1,9 @@
 <template>
-    <div id="dashboard-bmi-chart"> 
+    <div id="dashboard-bmi-chart">
         <el-card :bordered="false" shadow="hover">
-           <!-- <template #header>xx</template>  -->
+            <!-- <template #header>xx</template> -->
             <ECharts :options="chartOptions" />
-     
+
             <!-- <template #footer>BMI xxxx</template> -->
         </el-card>
     </div>
@@ -16,13 +16,13 @@ import ECharts from '@/components/ECharts.vue'
 import { useUserTargetStore } from '@/stores/userTargetStore'
 const userTargetStore = useUserTargetStore();
 
-const bmi =  computed(() => {
+const bmi = computed(() => {
 
     // console.log( userTargetStore.targets.find(item => item.name === 'BMI'))
-     
-    return  userTargetStore.targets.find(item => item.name === 'BMI')?.tagValue || {};
+
+    return userTargetStore.targets.find(item => item.name === 'BMI')?.tagValue || {};
     // return '';
-     
+
 });
 
 
@@ -35,7 +35,7 @@ const chartOptions = ref({
             startAngle: 180,
             endAngle: 0,
             center: ['50%', '75%'],
-            
+
             radius: '100%',
             min: 0,
             max: 50,
@@ -124,5 +124,4 @@ const chartOptions = ref({
 #dashboard-bmi-chart {
     margin-bottom: 35px;
 }
-
 </style>
