@@ -16,18 +16,18 @@
 						<ul class="nav navbar-nav">
 							<li class="level">
 								<!-- <a href="/" class="page-scroll nav-link" data-scroll>Home</a> -->
-								<router-link to="/" active-class="current">Home</router-link>
+								<router-link to="/" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">Home</router-link>
 							</li>
 							<li class="level">
-								<router-link to="/dashboard" active-class="current">Dashboard</router-link>
+								<router-link to="/dashboard" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">Dashboard</router-link>
 							</li>
 							<li class="level">
 								<!-- <a href="/trend" class="page-scroll nav-link" data-scroll>trend</a> -->
-								<router-link to="/trend" active-class="current">trend</router-link>
+								<router-link to="/trend" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">trend</router-link>
 							</li>
 							<li class="level">
 								<!-- <a href="/test" class="page-scroll nav-link" data-scroll>Test</a> -->
-								<router-link to="/Settings" active-class="current">Settings</router-link>
+								<router-link to="/Settings" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">Settings</router-link>
 							</li>
 						</ul>
 					</div>
@@ -43,11 +43,11 @@
 								<el-dropdown-menu slot="dropdown" class="mobile-custom-dropdown-menu">
 									<!-- <el-dropdown-item @click="editProfile"><span > <el-icon><Edit /></el-icon>  EditProfile </span></el-dropdown-item> -->
 									<el-dropdown-item><router-link to="/"
-											active-class="current">Home</router-link></el-dropdown-item>
-									<el-dropdown-item><router-link to="/dashboard" active-class="current"> Dashboard
+											active-class="current" @click="() => handleNavClick('/')" :class="{ 'click-feedback': navClickStates['/'] }">Home</router-link></el-dropdown-item>
+									<el-dropdown-item><router-link to="/dashboard" active-class="current" @click="() => handleNavClick('/dashboard')" :class="{ 'click-feedback': navClickStates['/dashboard'] }"> Dashboard
 										</router-link></el-dropdown-item>
 
-									<el-dropdown-item><router-link to="/settings" active-class="current"> Settings
+									<el-dropdown-item><router-link to="/settings" active-class="current" @click="() => handleNavClick('/settings')" :class="{ 'click-feedback': navClickStates['/settings'] }"> Settings
 										</router-link></el-dropdown-item>
 
 								</el-dropdown-menu>
@@ -115,10 +115,10 @@
 
 
 <script setup>
-import { computed, ref, onMounted, watch, onBeforeUnmount } from 'vue'
+import { useAuthStore } from '@/stores/auth';
+import { Menu, Setting, SwitchButton, User, UserFilled } from '@element-plus/icons-vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth'
-import { Setting, Menu, User, UserFilled,SwitchButton } from '@element-plus/icons-vue'
 const router = useRouter();
 const authStore = useAuthStore()
 const user = authStore.user
@@ -134,6 +134,14 @@ const checkScreenSize = () => {
 // 导航方法
 const navigateTo = (path) => {
 	router.push({ name: path });
+};
+
+const isNavClicked = ref(false);
+const handleNavClick = () => {
+	isNavClicked.value = true;
+	setTimeout(() => {
+		isNavClicked.value = false;
+	}, 200);
 };
 
 // 监听窗口大小变化
@@ -173,6 +181,9 @@ const sginOut = () => {
 .current {
 	color: #fb4275;
 
+}.click-feedback {
+	background-color: #ffe5ec;
+	transition: background-color 0.2s;
 }
 
 .class-user-login {
