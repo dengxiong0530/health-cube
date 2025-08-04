@@ -1,19 +1,7 @@
 <template>
   <div class="weight-trend-card">
-
-
-
     <el-card shadow="hover">
       <div class="weight-tag">
-        <!-- <el-row :gutter="24" class="stats-section">
-          <el-col :span="8" :offset="5">
-            <div class="stat-label">Duration of Recording: 50 Days</div>
-            
-          </el-col>
-          <el-col :span="8">
-            <div class="stat-label">Dody Weight Change -3.1 kg</div>
-          </el-col>
-        </el-row> -->
       </div>
       <div class="custom-tabs">
         <div v-for="tab in tabs" :key="tab.name"
@@ -21,70 +9,26 @@
           {{ tab.label }}
         </div>
       </div>
-      <!-- 
-    <div class="custom-tabs">
-      <el-radio-group v-model="selectedStatus"   @change="handleChange" class="custom-style">
-        <el-radio-button value="oneweek">One Week</el-radio-button>
-        <el-radio-button value="onemonth">One Month</el-radio-button>
-        <el-radio-button value="ninetydays">Ninety Days</el-radio-button>
-        <el-radio-button value="halfyear">Half a Year</el-radio-button>
-      </el-radio-group>
-    </div> -->
-
-      <!-- 顶部统计数据 -->
-      <!-- <el-row :gutter="24" class="stats-section"> -->
-      <!-- <el-col :span="8">
-          <div class="stat-label">Record count: {{ weightData.days || null }} </div>
-          <div class="stat-value"></div>
-        </el-col> -->
-
-      <!-- <el-col :span="6">
-          <div class="stat-label">Highest</div>
-          <div class="stat-value"><el-icon style="font-size: 15px; color: #FF0000;transform: scale(1.1);">
-              <Top />
-            </el-icon> {{ weightData.maxWeight || null }} kg</div>
-        </el-col> -->
-      <!-- <el-col :span="6">
-        <div class="stat-label">Orders</div>
-        <div class="stat-value">14k</div>
-      </el-col> -->
-      <!-- <el-col :span="6">
-          <div class="stat-label">Lowest</div>
-          <div class="stat-value"><el-icon style="font-size: 15px; color: #32CD32;transform: scale(1.1);">
-              <Bottom />
-            </el-icon> {{ weightData.minWeight || null }} kg </div>
-        </el-col> -->
-
-      <!-- </el-row> -->
-
-
-      <!-- 趋势图容器 -->
       <div class="chart-wrapper">
         <div ref="chartRef" class="chart"></div>
       </div>
-
-
       <div v-if="hasMissingInfo" class="missing-info-tip">
         <p class="form-subtitle">
           In the past <span class="span-size"> {{ extractNumberFromPeriod(activeTab) }} days </span>, you recorded your
           weight data for <span class="span-size">{{ weightData.days }} days.</span><br>
           Your weight change is <span :style="{ color: getNumberColor(weightData.weightChange), fontSize: '18px' }"> {{
-            weightData.weightChange }} kg. </span> <br>
+            weightData.weightChange || 0 }} kg. </span> <br>
           <span :style="{ color: getNumberColor(weightData.weightChange), fontSize: '18px' }"> {{ textSpan(
             weightData.weightChange) }} </span>
         </p>
       </div>
-
-
     </el-card>
   </div>
 </template>
 
 <script setup>
-
 import { onMounted, ref, watch, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
-import { Bottom, Top } from '@element-plus/icons-vue'
 import { getUserWeightByDateRange } from '@/services/userWeightService.js';
 import { getDateRange } from '@/utils/common'
 import { useAuthStore } from '@/stores/auth'
@@ -116,7 +60,7 @@ const chartRef = ref(null);
 const initChart = () => {
   if (chartRef.value && !chartInstance) {
     chartInstance = echarts.init(chartRef.value);
-    // 设置初始空配置
+
     chartInstance.setOption({
       xAxis: { type: 'category' },
       yAxis: { type: 'value' },
@@ -125,7 +69,6 @@ const initChart = () => {
   }
 };
 
-// 更新图表数据（数据变化时调用）
 const updateChart = (data) => {
   if (!chartInstance) return;
 
@@ -133,7 +76,6 @@ const updateChart = (data) => {
   const xAxisData = data.value.xAxisData
   const seriesData = data.value.seriesData
 
-  // 更新图表配置
   chartInstance.setOption({
     xAxis: {
       boundaryGap: false,
@@ -209,16 +151,15 @@ const updateChart = (data) => {
   });
 };
 
-// 提取数字的函数（直接定义在组件中）
 const extractNumberFromPeriod = (period) => {
   const match = period.match(/\d+/);
   return match ? Number(match[0]) : null;
 };
 
 
-// 监听activeTab变化，自动加载对应时间范围的数据
+
 watch(activeTab, async (newTab) => {
-  // 比如调用之前的getDateRange方法获取日期范围
+
   try {
     const { startDate, endDate } = getDateRange(newTab);
 
@@ -230,31 +171,35 @@ watch(activeTab, async (newTab) => {
     weightData.value = processWeightData(data);
     updateChart(weightData);
 
-    if (weightData.value.days >= 5) {
-      hasMissingInfo.value = true
-    }
+    // if (weightData.value.days >= 5) {
+    //   hasMissingInfo.value = true
+    // }
+    hasMissingInfo.value = weightData.value.days >= 3;
 
     // console.log(weightData.value.days);
   } catch (error) {
-    console.error('watch 异步操作失败：', error);
+    console.error('watch error:', error);
+     hasMissingInfo.value = false;
   }
 
 }, { immediate: true });
 
 
 onMounted(() => {
+  // if (weightData.value.days >= 5) {
+  //   hasMissingInfo.value = true
+  // }
+  // console.log(hasMissingInfo.value);
   initChart();
   window.addEventListener('resize', () => {
     chartInstance?.resize();
   });
 
-      if (weightData.value.days >= 5) {
-      hasMissingInfo.value = true
-    }
+
 
 });
 
-// 组件卸载时销毁图表（避免内存泄漏）
+
 onUnmounted(() => {
   if (chartInstance) {
     chartInstance.dispose();
@@ -278,11 +223,11 @@ const textSpan = (data) => {
 
 const getNumberColor = (num) => {
   if (num > 0) {
-    return '#FF0000' // 大于0：红色
+    return '#FF0000'
   } else if (num < 0) {
-    return ' #32CD32' // 小于0：
+    return ' #32CD32'
   } else {
-    return 'gray' // 等于0：灰色
+    return 'gray'
   }
 }
 
@@ -311,12 +256,12 @@ const getNumberColor = (num) => {
   font-size: 14px;
   font-weight: 600;
   color: #6273e1;
-  /* 统一深色，可按需求调整 */
+
 }
 
 .chart-wrapper {
   height: 300px;
-  /* 图表高度，可调整 */
+
 }
 
 .chart {
@@ -324,7 +269,6 @@ const getNumberColor = (num) => {
   height: 100%;
 }
 
-/* 标签栏样式，可根据需求调整或删除 */
 .custom-tabs {
   display: flex;
   border-bottom: 1px solid var(--el-border-color);

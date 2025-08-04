@@ -9,7 +9,6 @@
     </p>
 
 
-    <!-- 自定义标签栏，若不需要可删除，这里保留方便整体结构 -->
     <div class="custom-tabs">
       <div v-for="tab in tabs" :key="tab.name" :class="['custom-tab', { 'custom-tab--active': activeTab === tab.name }]"
         @click="activeTab = tab.name">
@@ -45,11 +44,11 @@
         <el-alert title="Waist circumference and hip circumference are mainly used to calculate the waist - to - hip ratio, which is also an important indicator of abdominal fat distribution." type="info" show-icon effect="light" />
       </div>
       <el-row :gutter="24" class="class-profile-row">
-        <el-col :span="10"> <el-form-item label="Height(cm)" prop="height">
+        <el-col :xs="24" :sm="20" :md="10" :lg="10" :xl="10"> <el-form-item label="Height(cm)" prop="height">
             <el-input-number v-model.number="userInfo.height" placeholder="Please enter your height(cm)." :min="50"
               :max="300" :step="0.2"></el-input-number>
           </el-form-item></el-col>
-        <el-col :span="10">
+        <el-col :xs="24" :sm="20" :md="10" :lg="10" :xl="10">
 
           <el-form-item label="Age" prop="age">
             <el-input-number v-model.number="userInfo.age" placeholder="Please enter your age." :min="15" :max="120">
@@ -58,21 +57,21 @@
         </el-col>
       </el-row>
       <el-row :gutter="24" class="class-profile-row">
-        <el-col :span="10"> <el-form-item label="Weight(kg)" prop="weight">
+        <el-col :xs="24" :sm="20" :md="10" :lg="10" :xl="10"> <el-form-item label="Weight(kg)" prop="weight">
             <el-input-number v-model.number="userInfo.weight" placeholder="Please enter your weight (kg)." :min="10"
               :max="500" :step="0.2"></el-input-number>
           </el-form-item></el-col>
-        <el-col :span="10"> <el-form-item label="Waist(cm)" prop="waist">
+        <el-col :xs="24" :sm="20" :md="10" :lg="10" :xl="10"> <el-form-item label="Waist(cm)" prop="waist">
             <el-input-number v-model.number="userInfo.waist" placeholder="Please enter your Waist (cm)." :min="10"
               :max="500" :step="0.2"></el-input-number>
           </el-form-item></el-col>
       </el-row>
       <el-row :gutter="24" class="class-profile-row">
-        <el-col :span="10"> <el-form-item label="Hip(cm)" prop="hip">
+        <el-col :xs="24" :sm="20" :md="10" :lg="10" :xl="10"> <el-form-item label="Hip(cm)" prop="hip">
             <el-input-number v-model.number="userInfo.hip" placeholder="Please enter your Hip (cm)." :min="10"
               :max="500" :step="0.2"></el-input-number>
           </el-form-item></el-col>
-        <el-col :span="10">
+        <el-col :xs="24" :sm="20" :md="10" :lg="10" :xl="10">
           <el-form-item label="Neck(cm)" prop="neck">
             <el-input-number v-model.number="userInfo.neck" placeholder="Please enter your Neck (cm)." :min="10"
               :max="500" :step="0.2">
@@ -119,13 +118,13 @@ const userDataStore = useUserStore()
 
 // 用户信息状态
 const userInfo = ref({
-  height: null,
-  age: null,
-  weight: null,
-  gender: null,
-  waist: null, //腰围
-  hip: null, //臀围
-  neck: null // 脖围
+  height: 180,
+  age: 28,
+  weight: 70,
+  gender: 2,
+  waist: 80, //腰围
+  hip: 91, //臀围
+  neck: 35 // 脖围
 })
 
 // 检查是否有缺失的信息
@@ -237,7 +236,13 @@ const submitForm = async () => {
 <style scoped>
 .profile-container {
   padding: 20px;
+  position: relative;
+  z-index: 0;  
+
 }
+
+
+
 
 /* 标签栏样式，可根据需求调整或删除 */
 .custom-tabs {

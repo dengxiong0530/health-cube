@@ -1,11 +1,11 @@
 <template>
 
-  <div class="signinform">
+  <div class="signinform" :class="{ 'is-faded-in': isFadedIn }">
     <!-- <h1>Service Login Form</h1> -->
     <!-- container -->
     <div class="container">
       <!-- main content -->
-      <div id="div-login" class="w3l-form-info" v-show="isVisible">
+      <div id="div-login" class="w3l-form-info fade-in" v-show="isVisible">
         <div class="w3_info">
           <h2>Sign in</h2>
           <!-- <el-form action="#" method="post" ref="loginRef" :model="loginForm"> -->
@@ -36,7 +36,7 @@
       </div>
       <!-- //main content -->
 
-      <div id="div-sign-up" class="w3l-form-info" v-show="!isVisible">
+      <div id="div-sign-up" class="w3l-form-info fade-in" v-show="!isVisible">
         <div class="w3_info">
           <h2>Sign Up</h2>
           <el-form :model="signUpForm" @submit.prevent="handleSignUp">
@@ -65,12 +65,6 @@
 
 
 
-          <!-- 已有账户链接 -->
-          <!-- <div class="mt-6 text-center">
-                <span class="text-gray-600">Already have an account?</span>
-                <router-link to="/login" class="text-primary-600 hover:text-primary-800 ml-1 font-medium">Sign in</router-link>
-            </div> -->
-
 
         </div>
       </div>
@@ -98,9 +92,9 @@ const userDataStore = useUserStore()
 const isVisible = ref(true)
 const loading = ref(false)
 const open = ref(false)
-
-
 const signUploading = ref(false);
+// 添加渐入动画控制变量
+const isFadedIn = ref(false)
 
 const loginForm = reactive({
   email: '',
@@ -121,6 +115,12 @@ const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY
 
 // 页面加载时检查是否有保存的凭证
 onMounted(() => {
+  // 设置初始隐藏状态
+  isFadedIn.value = false;
+  // 延迟触发渐入效果，确保DOM已渲染
+  setTimeout(() => {
+    isFadedIn.value = true;
+  }, 100);
   if (cookiesManager.isCookiesAllowed()) {
     const credentials = cookiesManager.getCookie('remembered_credentials')
     if (credentials) {
@@ -301,7 +301,7 @@ const loginMessage = (message, type) => {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
 }
 
 
@@ -315,18 +315,52 @@ img {
   max-width: 100%;
 }
 
-/*-- //Reset-Code --*/
 
-/*-- form styling --*/
+/* 添加渐入动画样式 */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.is-faded-in .fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 修改signinform类以支持响应式左边空隙 */
 .signinform {
-  padding: 40px 40px;
-  justify-content: center;
-  display: grid;
-  /* grid-template-rows: 1fr auto 1fr; */
-  align-items: center;
-  /* min-height: 10vh; */
-  background: #f5f5f5;
-  margin-top: 100px;
+  transition: opacity 0.8s ease;
+  margin-top: 110px;
+  /* 移除固定的margin-left */
+  margin-left: 20%; /* 默认值，适用于大屏幕 */
+}
+
+/* 平板设备 */
+@media (max-width: 992px) {
+  .signinform {
+    margin-left: 15%;
+  }
+}
+
+/* 移动设备 - 横向 */
+@media (max-width: 768px) {
+  .signinform {
+    margin-left: 10%;
+  }
+}
+
+/* 移动设备 - 纵向 */
+@media (max-width: 576px) {
+  .signinform {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 80px; /* 减少顶部边距，适应小屏幕 */
+  }
+  .w3_info {
+    width: 100%; /* 让表单宽度适应小屏幕 */
+    padding: 2em;
+  }
 }
 
 input[type="text"],
@@ -531,28 +565,7 @@ h3.agileits {
   left: 0;
 }
 
-/* h5 {
-    text-align: center;
-    margin: 10px 0px;
-    font-size: 15px;
-    font-weight: 600;
-    color: #000;
-} */
 
-/* .footer p {
-    text-align: center;
-    font-size: 18px;
-    line-height: 28px;
-    color: #777;
-}
-
-.footer p a {
-    color: #9146ff;
-}
-
-.footer p a:hover {
-    text-decoration: underline;
-} */
 
 p.continue {
   margin-top: 25px;

@@ -1,12 +1,11 @@
 <template>
     <div id="div-add_weight">
         <el-card shadow="hover">
-            <!-- 表单标题及描述 -->
+
             <h2 class="form-title">Weight data entry</h2>
             <p class="form-subtitle">Please enter your current weight. You can also input your weight from the previous
                 month as a supplement.</p>
 
-            <!-- Element Plus 表单组件 -->
             <el-form :model="formData">
                 <el-form-item label="Data Range">
                     <el-date-picker v-model="formData.day" type="date" placeholder="Pick a day" size="default"
@@ -17,13 +16,6 @@
                     <el-input-number v-model.number="formData.weight" :min="10" :max="500" :step="0.1" />
                 </el-form-item>
 
-                <!-- <el-form-item label="Password">
-                    <el-input v-model="formData.password" placeholder="Password" type="password" />
-                </el-form-item> -->
-
-
-
-                <!-- 提交按钮 -->
                 <el-form-item>
                     <el-button style="background-color:#f2125e;border-color:#f2125e; color:#fff;" @click="handleSubmit"
                         :disabled="isDisabled">
@@ -65,23 +57,16 @@ onMounted(async () => {
 
 })
 
-
-
-
-
-
 const disabledDate = (time) => {
-    // 1. 计算「30天前的0点」（自动处理跨月/年）
+
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30); // 日期减30天
     thirtyDaysAgo.setHours(0, 0, 0, 0); // 重置为当天0点，忽略时刻
 
-    // 2. 计算「明天的0点」（即今天的结束时刻）
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0); // 明天0点 = 今天23:59:59.999的下一刻
+    tomorrow.setHours(0, 0, 0, 0); 
 
-    // 3. 禁用规则：早于30天前0点，或晚于等于明天0点
     return time.getTime() < thirtyDaysAgo.getTime() || time.getTime() >= tomorrow.getTime();
 }
 
@@ -122,19 +107,16 @@ const handleSubmit = async () => {
     }
 }
 
-// 控制按钮状态
 
 </script>
 
 <style scoped>
-/* 简单样式优化，与示例布局对齐 */
+
 #div-add_weight {
-    /* padding: 24px; */
-    /* max-width: 500px; */
-    /* 可根据需求调整 */
-    /* margin-left: 28%; */
-    /* margin-right: 7% */
+
     margin-bottom: 20px;
+    position: relative;
+    z-index: 0;
 }
 
 .form-title {

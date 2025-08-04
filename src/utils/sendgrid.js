@@ -20,7 +20,7 @@ export const sendPasswordResetEmail = async (email, resetUrl) => {
     console.error('Error sending password reset email:', error)
     return { 
       success: false, 
-      error: error.message || '发送邮件失败'
+      error: error.message || 'Send email exception.'
     }
   }
 }

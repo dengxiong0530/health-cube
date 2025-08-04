@@ -55,7 +55,7 @@
 import DataCard from '@/components/DataCard.vue';
 import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/userStore'
-
+import { ElMessageBox } from 'element-plus' // 引入ElMessageBox
 import { ref, onMounted,computed} from 'vue'
 
 const authStore = useAuthStore()
@@ -86,8 +86,15 @@ const neck = computed(() => {
   return userInfo.value?.neck || 'N/A'; // 使用可选链和默认值
 });
 
-
-
+// 检查用户信息是否完整
+const checkUserInfoComplete = () => {
+  // 检查height, weight, hip, waist, neck是否都存在且有有效值
+  return !!(userInfo.value?.height && 
+           userInfo.value?.weight && 
+           userInfo.value?.hip && 
+           userInfo.value?.waist && 
+           userInfo.value?.neck);
+}
 
 const fetchUserInfo = async () => {
     userInfo.value   =  await userDataStore.fetchUserInfo(userId)
@@ -96,9 +103,24 @@ const fetchUserInfo = async () => {
 
 onMounted( async () => {
     await fetchUserInfo();
-    // console.log(userInfo.value.height)
-    // console.log(userInfo.value)
-    // console.log(userInfo)
+    
+    // 检查用户信息是否完整，如果不完整则显示提示
+    if (!checkUserInfoComplete()) {
+      ElMessageBox.alert(
+        'Your health data is incomplete. Please complete your personal information first.',
+        'Prompt for Information Completion',
+        {
+          confirmButtonText: 'Go to complete it',
+          callback: (action) => {
+            // 点击确认按钮后跳转到设置页面
+            if (action === 'confirm') {
+              // 使用router.push跳转到设置页面
+              window.location.href = '/settings';
+            }
+          }
+        }
+      );
+    }
 })
 </script>
 <style scoped>

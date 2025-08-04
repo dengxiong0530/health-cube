@@ -2,7 +2,7 @@
     <div class="div-target-detail" ref="targetDetailDiv">
 
         <el-card class="target-card-right" shadow="hover">
-            <h3>Target Detail</h3>
+            <!-- <h3>Target Detail</h3> -->
             <el-row :gutter="2">
 
                 <el-button color="#626aAf" size="small" style="margin-bottom: 10px;"
@@ -33,7 +33,8 @@
                 </el-card> </el-row>
             <el-row v-if="tag">
                 <el-card class="target-card-detail class-span-call" shadow="hover">
-                    <h3>Indicator analysis</h3>
+                    <!-- <h3>Indicator analysis</h3> -->
+                     <h3> Health condition</h3>
                     <el-text class="target-dt-text" type="info" size="default">
 
                         {{ targetJson.indexAnalysis[tag] }}
@@ -44,7 +45,7 @@
                         {{ targetJson.exerciseSuggestions[tag] }}
                     </el-text>
                     <el-divider />
-                    <h3>Dietary advice</h3>
+                    <h3>Dietary suggestions</h3>
                     <el-text class="target-dt-text" type="info" size="large">
                         {{ targetJson.DietaryAdvice[tag] }}
                     </el-text>

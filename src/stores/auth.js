@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('auth', {
         this.user = data.user
         return { data }
       } catch (err) {
-        this.error = '登录请求失败'
+        this.error = 'The login request has failed.'
         console.error(err)
         return { error: err }
       } 
@@ -47,7 +47,7 @@ export const useAuthStore = defineStore('auth', {
         
         }
       } catch (err) {
-        this.error = '登出失败'
+        this.error = 'The logout has failed.'
         console.error(err)
       } finally {
         this.loading = false
@@ -75,7 +75,7 @@ export const useAuthStore = defineStore('auth', {
 
         if (error) {
           this.error = error.message
-          console.error('更新密码失败:', error)
+          console.error('The password update has failed.:', error)
           return { error }
         }
 
@@ -83,8 +83,8 @@ export const useAuthStore = defineStore('auth', {
         this.error = null
         return { data: { user: this.user } }
       } catch (err) {
-        this.error = '更新密码时发生错误'
-        console.error('更新密码异常:', err)
+        this.error = 'An error occurred while updating the password.'
+        console.error('There is something wrong with the password update.', err)
         return { error: err }
       } finally {
         this.loading = false
@@ -109,5 +109,5 @@ export const useAuthStore = defineStore('auth', {
       }
     }  
   },
-  persist: true // 启用本地存储，保持会话状态
+  persist: true 
 })

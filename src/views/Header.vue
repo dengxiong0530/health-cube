@@ -41,13 +41,12 @@
 							</span>
 							<template #dropdown>
 								<el-dropdown-menu slot="dropdown" class="mobile-custom-dropdown-menu">
-									<!-- <el-dropdown-item @click="editProfile"><span > <el-icon><Edit /></el-icon>  EditProfile </span></el-dropdown-item> -->
 									<el-dropdown-item><router-link to="/"
-											active-class="current" @click="() => handleNavClick('/')" :class="{ 'click-feedback': navClickStates['/'] }">Home</router-link></el-dropdown-item>
-									<el-dropdown-item><router-link to="/dashboard" active-class="current" @click="() => handleNavClick('/dashboard')" :class="{ 'click-feedback': navClickStates['/dashboard'] }"> Dashboard
+											active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">Home</router-link></el-dropdown-item>
+									<el-dropdown-item><router-link to="/dashboard" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }"> Dashboard
 										</router-link></el-dropdown-item>
 
-									<el-dropdown-item><router-link to="/settings" active-class="current" @click="() => handleNavClick('/settings')" :class="{ 'click-feedback': navClickStates['/settings'] }"> Settings
+									<el-dropdown-item><router-link to="/settings" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }"> Settings
 										</router-link></el-dropdown-item>
 
 								</el-dropdown-menu>
@@ -85,19 +84,27 @@
 									<el-dropdown-menu slot="dropdown" split-button="true" class="custom-dropdown-menu">
 										<el-dropdown-item><span class="dropdown-item-user"> Welcome User: <br> {{
 											user?.email }} <br> </span></el-dropdown-item>
-										<el-dropdown-item  ><span> <el-icon>
+										<!-- <el-dropdown-item  ><span> <el-icon>
 													<UserFilled />
-												</el-icon> Edit User </span></el-dropdown-item>
+												</el-icon> Edit User </span></el-dropdown-item> -->
+
+
 										<el-dropdown-item> <router-link to="/settings" active-class="current">
 												<span><el-icon>
 														<Setting />
 													</el-icon> Settings </span>
 											</router-link>
 										</el-dropdown-item>
-										<el-dropdown-item @click="sginOut"> <span class="logout-item"> <el-icon>
+
+	<el-dropdown-item @click="sginOut">   <el-icon>
 													<SwitchButton />
 												</el-icon> SginOut
-											</span></el-dropdown-item>
+											 </el-dropdown-item>
+
+										<!-- <el-dropdown-item @click="sginOut"> <span class="logout-item"> <el-icon>
+													<SwitchButton />
+												</el-icon> SginOut
+											</span></el-dropdown-item> -->
 									</el-dropdown-menu>
 								</template>
 							</el-dropdown>
@@ -178,6 +185,11 @@ const sginOut = () => {
 </script>
 
 <style scoped>
+.header-container {
+  position: relative; /* 设置相对定位，使z-index生效 */
+  z-index: 100; /* 设置较高的z-index，确保Header在其他内容之上 */
+}
+
 .current {
 	color: #fb4275;
 

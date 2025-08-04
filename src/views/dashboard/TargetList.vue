@@ -1,7 +1,7 @@
 <template>
     <div class="target-list-div">
         <el-card class="profile-card" shadow="hover">
-            <h3 class="target-list-card-title">Target List</h3>
+            <!-- <h3 class="target-list-card-title">Target List</h3> -->
             <div class="transactions-list">
 
                 <div class="transaction-item" v-for="(item, idx) in targetListData" :key="idx"

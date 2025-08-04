@@ -32,7 +32,7 @@ export const verifyCodeAndResetPassword = async (email, code, newPassword) => {
       { body: { email, code } }
     )
     if (verifyError) throw verifyError
-    if (!verifyData.valid) throw new Error('验证码错误或已过期')
+    if (!verifyData.valid) throw new Error('The verification code is incorrect or has expired.')
 
     // 更新密码
     const { data: updateData, error: updateError } = await supabase.functions.invoke(
@@ -43,10 +43,10 @@ export const verifyCodeAndResetPassword = async (email, code, newPassword) => {
 
     return { success: true }
   } catch (error) {
-    console.error('密码重置失败:', error)
+    console.error('The password reset has failed.:', error)
     return { 
       success: false, 
-      message: error.message || '密码重置失败' 
+      message: error.message || 'The password reset has failed.' 
     }
   }
 }

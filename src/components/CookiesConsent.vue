@@ -10,8 +10,8 @@
     </div>
     <template #footer>
       <div class="dialog-footer">
-        <button class="btn btn-default" @click="handleReject">拒绝</button>
-        <button class="btn btn-primary" @click="handleAccept">接受</button>
+        <button class="btn btn-default" @click="handleReject">Refuse</button>
+        <button class="btn btn-primary" @click="handleAccept">Accept</button>
       </div>
     </template>
   </CustomDialog>
