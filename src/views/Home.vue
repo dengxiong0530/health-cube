@@ -18,9 +18,7 @@
 						</div>
 						<div class="col-lg-6 p-0">
 							<div class="banner-main-img">
-								<!-- <div class="back-bg fadeInRight delay5">
-											<img src="@/assets/images/banner-vactor.svg" alt="hexan">
-										</div> -->
+							
 								<div class="front-bg fadeInRight">
 									<img src="@/assets/images/banner1.png" alt="healthcubes">
 								</div>
@@ -51,7 +49,7 @@
 					<el-col class="one-row-col fade-in-item" :xs="20" :sm="12" :md="12" :lg="6" :xl="6">
 						<!-- <div class="team-box mb-30"> -->
 							<div class="s-thumb">
-								<img src="@/assets/images/ss1.png" alt="Hexan">
+								<img src="@/assets/images/ss1.png" alt="HealthCubes">
 							</div>
 							<div class="s-detail">
 								<h3 class="services-tital">Weight entry</h3>
@@ -64,7 +62,7 @@
 					<el-col class="one-row-col fade-in-item" :xs="20" :sm="12" :md="12" :lg="6" :xl="6">
 						<!-- <div class="team-box mb-30"> -->
 							<div class="s-thumb">
-								<img src="@/assets/images/ss2.jpg" alt="Hexan">
+								<img src="@/assets/images/ss2.jpg" alt="HealthCubes">
 							</div>
 							<div class="s-detail">
 								<h3 class="services-tital">Data conversion</h3>
@@ -77,7 +75,7 @@
 					<el-col class="one-row-col fade-in-item" :xs="20" :sm="12" :md="12" :lg="6" :xl="6">
 						<!-- <div class="team-box mb-30"> -->
 							<div class="s-thumb">
-								<img src="@/assets/images/ss3.jpg" alt="Hexan">
+								<img src="@/assets/images/ss3.jpg" alt="HealthCubes">
 							</div>
 							<div class="s-detail">
 								<h3 class="services-tital">Weight trend</h3>
@@ -90,7 +88,7 @@
 					<el-col class="one-row-col fade-in-item" :xs="20" :sm="12" :md="12" :lg="6" :xl="6">
 						<!-- <div class="team-box mb-30"> -->
 							<div class="s-thumb">
-								<img src="@/assets/images/ss4.png" alt="Hexan">
+								<img src="@/assets/images/ss4.png" alt="HealthCubes">
 							</div>
 							<div class="s-detail">
 								<h3 class="services-tital">Exercise suggestions</h3>
@@ -106,79 +104,6 @@
 	</section>
 
 
-	<!-- <section class="services-section position-r ptb-100">
-		<div class="service-bg shape-rotate">
-			<img src="@/assets/images/services-bg.svg" alt="healthcubes">
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="heading-part mb-30 mb-sm-20 mb-xs-15">
-						<span></span>
-						<h2 class="main_title">Services</h2>
-						<p>No complicated operations needed. Let the data be your powerful tool for fat loss and get
-							closer to your ideal figure step by step. </p>
-					</div>
-				</div>
-			</div>
-			<div class="ser-feature-block mb_-30 center-sm">
-
-				<div class="row">
-
-					<div class="col-lg-3 col-sm-6 fadeInUp delay1">
-						<div class="services-box mb-30">
-							<div class="services-icon services1">
-								<img src="@/assets/images/seo.svg" alt="hexan">
-
-							</div>
-							<div class="services-detail">
-								<h3 class="ser-title">Indicator analysis</h3>
-								<div class="ser-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-									do eiusmod tempor.</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6 fadeInUp delay3">
-						<div class="services-box mb-30">
-							<div class="services-icon services2">
-								<img src="@/assets/images/technology.svg" alt="hexan">
-							</div>
-							<div class="services-detail">
-								<h3 class="ser-title">Weight trend</h3>
-								<div class="ser-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-									do eiusmod tempor.</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6 fadeInUp delay5">
-						<div class="services-box mb-30">
-							<div class="services-icon services3">
-								<img src="@/assets/images/cloud.svg" alt="hexan">
-							</div>
-							<div class="services-detail">
-								<h3 class="ser-title">Exercise suggestions</h3>
-								<div class="ser-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-									do eiusmod tempor.</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6 fadeInUp delay7">
-						<div class="services-box mb-30">
-							<div class="services-icon services3">
-								<img src="@/assets/images/support.svg" alt="hexan">
-							</div>
-							<div class="services-detail">
-								<h3 class="ser-title">Dietary suggestions</h3>
-								<div class="ser-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-									do eiusmod tempor.</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-	<!-- Site Services Block End -->
 
 	<!-- Digital Marketing start -->
 	<section id="about-part" class="menu-section marketing position-r ptb-100">
@@ -204,8 +129,8 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="marketing-img text-right text-md-center fadeInRight">
-						<!-- <img src="@/assets/images/marketing-img.svg" alt="hexan"> -->
-						<img src="@/assets/images/lv23.png" alt="hexan">
+						
+						<img src="@/assets/images/lv23.png" alt="HealthCubes">
 					</div>
 				</div>
 			</div>

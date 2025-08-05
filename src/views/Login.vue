@@ -19,10 +19,10 @@
               <input type="Password" placeholder="Password" required="" v-model="loginForm.password">
             </div>
             <div class="form-row bottom">
-              <div class="form-check">
+              <!-- <div class="form-check">
                 <input type="checkbox" id="remenber" name="remenber" value="remenber" v-model="loginForm.rememberMe">
                 <label for="remenber"> Remember me?</label>
-              </div>
+              </div> -->
               <!-- <a href="#url" class="forgot">Forgot password?</a> -->
               <router-link class="forgot" to="/forgot-password">Forgot password?</router-link>
             </div>
