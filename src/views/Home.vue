@@ -5,7 +5,7 @@
 				<div class="container">
 					<div class="row m-0">
 						<div class="col-lg-6 p-0 fadeInLeft">
-							<div class="banner-detail-inner">
+							<div class="banner-detail-inner" style="margin-bottom: 10px;">
 								<h2 class="banner-title">Welcome to <span>healthcubes.top</span> </h2>
 								<h3>Make health management simpler.</h3>
 								<p>Easily track your weight and take control of your health rhythm —— Start right
@@ -13,7 +13,8 @@
 									calculate key indicators such as BMI and body fat percentage. There are also dynamic
 									trend charts to visually show the changes, helping you clearly understand your fat -
 									loss progress and adjust your plan in a timely manner.</p>
-								<a href="#price-part" class="btn big-width btn-color">Get Started</a>
+								<button @click="handleGetStarted" class="btn big-width btn-color">Get Started</button> 
+							
 							</div>
 						</div>
 						<div class="col-lg-6 p-0">
@@ -200,7 +201,22 @@
 
 
 <script setup>
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 
+const authStore = useAuthStore()
+const router = useRouter()
+
+const handleGetStarted = () => {
+  // 检查userId是否存在
+  if (authStore.user && authStore.user.id) {
+    // userId存在，跳转到仪表板
+    router.push('/dashboard')
+  } else {
+    // userId不存在，跳转到登录页
+    router.push('/login')
+  }
+}
 </script>
 <style scoped>
 #banner-part {
