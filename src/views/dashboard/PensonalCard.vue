@@ -7,26 +7,23 @@
              
                 <div v-if="height" class="grid grid-cols-2 gap-4">
               
-                <el-row :gutter="25">
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+                <el-row :gutter="15">
+                    <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6" style="margin-bottom: 10px;">
                         <DataCard title=" Height " :value= "height" valueUnit="cm"  cardColor="#7DA0FA" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+                    <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
                         <DataCard title=" Weight " :value= "weight" valueUnit="kg" cardColor="#7978E9" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+                    <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6" >
                         <DataCard title=" Waist " :value= "waist" valueUnit="cm" cardColor="#4747A1" />
                     </el-col>
 
-                    <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+                    <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6">
                         <DataCard title=" Hip " :value= "hip" valueUnit="cm" cardColor="#F3797E" />
                     </el-col>
 
-                    <!-- <el-col :xs="6" :sm="6" :md="6" :lg="4" :xl="6">
-                        <DataCard title=" Neck " :value= "neck" valueUnit="cm" cardColor="#f2a654" />
-                    </el-col> -->
 
                 </el-row>
 </div>
@@ -130,14 +127,14 @@ onMounted( async () => {
 
 #div-pensonal-card .button{
     margin-top: 10px;
-    margin-left: 80%;
+    /* margin-left: 80%; */
 }
 
 .class-data-card {
     /* height: 10px; */
     /* width: 160px; */
     margin-top: 35px;
-    margin-bottom: 35px;
+    margin-bottom: 15px;
 
 }
 </style>

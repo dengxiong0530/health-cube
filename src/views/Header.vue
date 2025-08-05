@@ -4,7 +4,7 @@
 			<div class="row m-0">
 				<div class="col-lg-3 col-md-4 col-8 p-0">
 					<div class="navbar-header">
-						<a class="navbar-brand page-scroll" href="/"  >
+						<a class="navbar-brand page-scroll" href="/">
 							<img alt="hexan" src="@/assets/images/logo.png">
 						</a>
 					</div>
@@ -16,18 +16,22 @@
 						<ul class="nav navbar-nav">
 							<li class="level">
 								<!-- <a href="/" class="page-scroll nav-link" data-scroll>Home</a> -->
-								<router-link to="/" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">Home</router-link>
+								<router-link to="/" active-class="current" @click="handleNavClick"
+									:class="{ 'click-feedback': isNavClicked }">Home</router-link>
 							</li>
 							<li class="level">
-								<router-link to="/dashboard" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">Dashboard</router-link>
+								<router-link to="/dashboard" active-class="current" @click="handleNavClick"
+									:class="{ 'click-feedback': isNavClicked }">Dashboard</router-link>
 							</li>
 							<li class="level">
 								<!-- <a href="/trend" class="page-scroll nav-link" data-scroll>trend</a> -->
-								<router-link to="/trend" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">trend</router-link>
+								<router-link to="/trend" active-class="current" @click="handleNavClick"
+									:class="{ 'click-feedback': isNavClicked }">trend</router-link>
 							</li>
 							<li class="level">
 								<!-- <a href="/test" class="page-scroll nav-link" data-scroll>Test</a> -->
-								<router-link to="/Settings" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">Settings</router-link>
+								<router-link to="/Settings" active-class="current" @click="handleNavClick"
+									:class="{ 'click-feedback': isNavClicked }">Settings</router-link>
 							</li>
 						</ul>
 					</div>
@@ -41,12 +45,21 @@
 							</span>
 							<template #dropdown>
 								<el-dropdown-menu slot="dropdown" class="mobile-custom-dropdown-menu">
-									<el-dropdown-item><router-link to="/"
-											active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">Home</router-link></el-dropdown-item>
-									<el-dropdown-item><router-link to="/dashboard" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }"> Dashboard
+									<el-dropdown-item><router-link to="/" active-class="current" @click="handleNavClick"
+											:class="{ 'click-feedback': isNavClicked }">Home</router-link></el-dropdown-item>
+									<el-dropdown-item><router-link to="/dashboard" active-class="current"
+											@click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">
+											Dashboard
 										</router-link></el-dropdown-item>
 
-									<el-dropdown-item><router-link to="/settings" active-class="current" @click="handleNavClick" :class="{ 'click-feedback': isNavClicked }"> Settings
+										<el-dropdown-item><router-link to="/trend" active-class="current"
+											@click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">
+											Trend
+										</router-link></el-dropdown-item>
+
+									<el-dropdown-item><router-link to="/settings" active-class="current"
+											@click="handleNavClick" :class="{ 'click-feedback': isNavClicked }">
+											Settings
 										</router-link></el-dropdown-item>
 
 								</el-dropdown-menu>
@@ -96,10 +109,10 @@
 											</router-link>
 										</el-dropdown-item>
 
-	<el-dropdown-item @click="sginOut">   <el-icon>
-													<SwitchButton />
-												</el-icon> SginOut
-											 </el-dropdown-item>
+										<el-dropdown-item @click="sginOut"> <el-icon>
+												<SwitchButton />
+											</el-icon> SginOut
+										</el-dropdown-item>
 
 										<!-- <el-dropdown-item @click="sginOut"> <span class="logout-item"> <el-icon>
 													<SwitchButton />
@@ -186,14 +199,18 @@ const sginOut = () => {
 
 <style scoped>
 .header-container {
-  position: relative; /* 设置相对定位，使z-index生效 */
-  z-index: 100; /* 设置较高的z-index，确保Header在其他内容之上 */
+	position: relative;
+	/* 设置相对定位，使z-index生效 */
+	z-index: 100;
+	/* 设置较高的z-index，确保Header在其他内容之上 */
 }
 
 .current {
 	color: #fb4275;
 
-}.click-feedback {
+}
+
+.click-feedback {
 	background-color: #ffe5ec;
 	transition: background-color 0.2s;
 }

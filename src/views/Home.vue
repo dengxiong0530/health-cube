@@ -47,7 +47,7 @@
 			<div class="mb_-30">
 			
 				<el-row :gutter="30">
-					<el-col class="one-row-col fade-in-item" :xs="20" :sm="12" :md="12" :lg="6" :xl="6">
+					<el-col class="one-row-col fade-in-item" :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
 						<!-- <div class="team-box mb-30"> -->
 							<div class="s-thumb">
 								<img src="@/assets/images/ss1.png" alt="HealthCubes">
@@ -60,7 +60,7 @@
 							<!-- </div> -->
 						</div>
 					</el-col>
-					<el-col class="one-row-col fade-in-item" :xs="20" :sm="12" :md="12" :lg="6" :xl="6">
+					<el-col class="one-row-col fade-in-item" :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
 						<!-- <div class="team-box mb-30"> -->
 							<div class="s-thumb">
 								<img src="@/assets/images/ss2.jpg" alt="HealthCubes">
@@ -73,7 +73,7 @@
 							<!-- </div> -->
 						</div>
 					</el-col>
-					<el-col class="one-row-col fade-in-item" :xs="20" :sm="12" :md="12" :lg="6" :xl="6">
+					<el-col class="one-row-col fade-in-item" :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
 						<!-- <div class="team-box mb-30"> -->
 							<div class="s-thumb">
 								<img src="@/assets/images/ss3.jpg" alt="HealthCubes">
@@ -86,7 +86,7 @@
 							<!-- </div> -->
 						</div>
 					</el-col>
-					<el-col class="one-row-col fade-in-item" :xs="20" :sm="12" :md="12" :lg="6" :xl="6">
+					<el-col class="one-row-col fade-in-item" :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
 						<!-- <div class="team-box mb-30"> -->
 							<div class="s-thumb">
 								<img src="@/assets/images/ss4.png" alt="HealthCubes">
