@@ -83,7 +83,15 @@
     justify-content: center;
     padding: 1.5rem;
     margin-left: 7%;
-    margin-right: 7%
+    margin-right: 7%;
+}
+
+/* 当屏幕尺寸为 xs 时，去掉 margin-left 和 margin-right */
+@media (max-width: 767px) {
+  #dashbord {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 
