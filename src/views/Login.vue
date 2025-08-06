@@ -19,10 +19,10 @@
               <input type="Password" placeholder="Password" required="" v-model="loginForm.password">
             </div>
             <div class="form-row bottom">
-              <!-- <div class="form-check">
+              <div class="form-check">
                 <input type="checkbox" id="remenber" name="remenber" value="remenber" v-model="loginForm.rememberMe">
-                <label for="remenber"> Remember me?</label>
-              </div> -->
+                <!-- <label for="remenber"> Remember me?</label> -->
+              </div>
               <!-- <a href="#url" class="forgot">Forgot password?</a> -->
               <router-link class="forgot" to="/forgot-password">Forgot password?</router-link>
             </div>
@@ -30,6 +30,17 @@
 
           </el-form>
           <!-- <p class="continue"><span></span></p> -->
+
+
+          <p class="continue"><span>or Login with</span></p>
+          <div class="social-login">
+            <div @click="handleGoogleLogin" class="google-login-btn" :disabled="isLoading">
+              <span v-if="isLoading">...</span>
+              <span v-else>
+                <i class="fa fa-google"> Sign in with Google </i>
+              </span>
+            </div>
+          </div>
 
           <p class="account">Don't have an account? <a @click="clickSignUp">Sign up</a></p>
         </div>
@@ -95,6 +106,33 @@ const open = ref(false)
 const signUploading = ref(false);
 // 添加渐入动画控制变量
 const isFadedIn = ref(false)
+
+const isLoading = ref(false)
+
+
+const handleGoogleLogin = async () => {
+  try {
+    isLoading.value = true
+    
+    // 调用 Supabase 的 Google 登录方法
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        // 登录成功后的回调 URL，需要在 Supabase 控制台配置
+        redirectTo: `${window.location.origin}/auth/callback`,
+        // 请求的权限范围
+        scopes: 'email profile'
+      }
+    })
+
+    if (error) throw error
+  } catch (error) {
+    console.error('Google login failed:', error.message)
+    alert('Login failed, please try again later')
+  } finally {
+    isLoading.value = false
+  }
+}
 
 const loginForm = reactive({
   email: '',
@@ -295,13 +333,10 @@ const loginMessage = (message, type) => {
 <style scoped>
 .big-message {
   width: 400px;
-  /* 设置你想要的宽度 */
   height: 200px;
-  /* 设置你想要的高度 */
   position: fixed;
   top: 50%;
   left: 50%;
-  /* transform: translate(-50%, -50%); */
 }
 
 
@@ -328,40 +363,19 @@ img {
   transform: translateY(0);
 }
 
-/* 修改signinform类以支持响应式左边空隙 */
+
 .signinform {
-  transition: opacity 0.8s ease;
   margin-top: 110px;
-  /* 移除固定的margin-left */
-  margin-left: 20%; /* 默认值，适用于大屏幕 */
+  padding: 40px 40px;
+  justify-content: center;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  align-items: center;
+  /* min-height: 100vh; */
+  background: #f1f1f1;
+
 }
 
-/* 平板设备 */
-@media (max-width: 992px) {
-  .signinform {
-    margin-left: 15%;
-  }
-}
-
-/* 移动设备 - 横向 */
-@media (max-width: 768px) {
-  .signinform {
-    margin-left: 10%;
-  }
-}
-
-/* 移动设备 - 纵向 */
-@media (max-width: 576px) {
-  .signinform {
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 80px; /* 减少顶部边距，适应小屏幕 */
-  }
-  .w3_info {
-    width: 100%; /* 让表单宽度适应小屏幕 */
-    padding: 2em;
-  }
-}
 
 input[type="text"],
 input[type="email"],
@@ -570,7 +584,7 @@ h3.agileits {
 p.continue {
   margin-top: 25px;
   padding: 0;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   color: #999;
   opacity: .8;
 }
@@ -605,7 +619,6 @@ p.continue span:after {
   display: grid;
   grid-auto-flow: column;
   grid-gap: 15px;
-  margin-bottom: 10px;
   justify-content: center;
 }
 
@@ -618,5 +631,36 @@ p.continue span:after {
   font-size: 15px;
   color: #fff;
   background: #3b5998;
+}
+.google-login-btn {
+  width: 100%;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-login-btn:hover {
+  background-color: #ea4335;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(66, 133, 244, 0.3);
+}
+
+.google-login-btn i.fa-google {
+  font-size: 14px;
+  color: #4285f4;
+}
+
+.google-login-btn:hover i.fa-google {
+  color: #fff;
+}
+
+.google-login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 </style>

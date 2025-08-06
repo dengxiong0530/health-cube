@@ -140,9 +140,12 @@ import { Menu, Setting, SwitchButton, User, UserFilled } from '@element-plus/ico
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-const authStore = useAuthStore()
-const user = authStore.user
-const isLoggedIn = computed(() => !!authStore.user)
+const authStore = useAuthStore();
+
+// 使用computed属性确保user是响应式的
+const user = computed(() => authStore.user);
+
+const isLoggedIn = computed(() => !!authStore.user);
 
 // const isActive = (path) => router.path === path;
 const isMobile = ref(false);

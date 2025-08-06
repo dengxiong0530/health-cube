@@ -10,6 +10,7 @@ import Settings from '@/views/Settings/Settings.vue'
 import Trend from '@/views/trend/Trend.vue'
 import ForgotPassword from '@/views/ForgotPassword.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
+import AuthCallback  from '@/views/AuthCallback.vue'
 
 
 const routes = [
@@ -71,6 +72,11 @@ const routes = [
       guest: true 
     }
   }
+  , {
+      path: '/auth/callback',
+      name: 'AuthCallback',
+      component: AuthCallback
+    }
 
   ,
   {
