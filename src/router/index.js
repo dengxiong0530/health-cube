@@ -115,7 +115,7 @@ router.beforeEach(async (to, from, next) => {
     await authStore.checkSession()
   }
   
-  console.log('xxx', authStore.user)
+  
   if (to.meta.requiresAuth && !authStore.user) {
     next({ name: 'Login' })
     ElMessage.warning('Please sign in first.')

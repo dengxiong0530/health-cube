@@ -58,8 +58,8 @@ import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
-// const userId = authStore.user.id
-const userId = computed(() => authStore.user.id);
+const userId = authStore.user.id
+// const userId = computed(() => authStore.user.id);
 const userDataStore = useUserStore()
 const router = useRouter()
 
@@ -90,6 +90,8 @@ const neck = computed(() => {
 // 检查用户信息是否完整
 const checkUserInfoComplete = () => {
   // 检查height, weight, hip, waist, neck是否都存在且有有效值
+  // console.log(userInfo.value)
+
   return !!(userInfo.value?.height &&
     userInfo.value?.weight &&
     userInfo.value?.hip &&

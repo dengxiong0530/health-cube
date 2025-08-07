@@ -224,7 +224,7 @@ const handleLogin = async () => {
 
       const userId = authStore.user.id;
       const data = await userDataStore.fetchUserInfo(userId)
-      console.log(userId, data)
+      // console.log(userId, data)
       if (data === -1) {
         router.push('/Settings')
       } else {
