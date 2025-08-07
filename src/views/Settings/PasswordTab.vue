@@ -101,20 +101,20 @@
 
     if (error) {
       // 显示错误提示
-      ElMessage.error(error.message || '密码更新失败')
+      ElMessage.error(error.message || 'Password update failed.')
       return
     }
 
     // 更新成功
-    ElMessage.success('密码已成功更新')
+    ElMessage.success('Password updated successfully.')
     
     // 清空表单
     currentPassword.value = ''
     newPassword.value = ''
     confirmPassword.value = ''
   } catch (err) {
-    console.error('更新密码异常:', err)
-    ElMessage.error('更新密码时发生异常')
+    console.error('There was an anomaly in updating the password.:', err)
+    ElMessage.error('There was an anomaly in updating the password.')
   }
 }
   </script>

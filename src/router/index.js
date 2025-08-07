@@ -4,7 +4,6 @@ import Login from '@/views/Login.vue';
 import NotFound from '@/views/error/404.vue';
 import { useAuthStore } from '@/stores/auth'
 import Dashboard from '@/views/dashboard/Dashboard.vue'
-import TEST from '@/views/test.vue'
 
 import Settings from '@/views/Settings/Settings.vue'
 import Trend from '@/views/trend/Trend.vue'
@@ -25,11 +24,7 @@ const routes = [
     name: 'Login',
     component: Login
   },
-  {
-    path: '/test',
-    name: 'TEST',
-    component: TEST
-  },
+
 
   {
 
@@ -114,10 +109,16 @@ const router = createRouter({
 // 路由守卫：保护需要登录的页面
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
-
+  
+  // 确保auth store已经初始化
+  if (authStore.user === undefined) {
+    await authStore.checkSession()
+  }
+  
+  console.log('xxx', authStore.user)
   if (to.meta.requiresAuth && !authStore.user) {
     next({ name: 'Login' })
-       ElMessage.warning('Please sgin in first.')
+    ElMessage.warning('Please sign in first.')
   } else {
     next()
   }
