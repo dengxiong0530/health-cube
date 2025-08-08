@@ -229,14 +229,9 @@ const handleLogin = async () => {
         router.push('/Settings')
       } else {
         router.push('/dashboard')
-
       }
-
-
-
       loginMessage('sign in success', 'success')
     }
-
   } catch (error) {
     // error.value = '登录失败，请重试'
     console.error('sigin error:', error)
